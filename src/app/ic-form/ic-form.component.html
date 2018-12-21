@@ -11,6 +11,50 @@
 </head>
 
 <body>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h3>Angular 6 Template-Driven Form Validation</h3>
+                    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required />
+                            <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+                                <div *ngIf="firstName.errors.required">First Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required />
+                            <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+                                <div *ngIf="lastName.errors.required">Last Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+                            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                                <div *ngIf="email.errors.required">Email is required</div>
+                                <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" />
+                            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                                <div *ngIf="password.errors.required">Password is required</div>
+                                <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal text-white">eProseed</h5>
     </div>
@@ -19,15 +63,19 @@
         <p class="lead">Interface Contract Generator</p>
     </div>
     <div class="container">
-        <form method="POST" action="/submitForm">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <!--<form method="POST" action="/submitForm">-->
             <div class="row">
-                <div class="col-md-6 mb-3">
+                <div class="form-group" class="col-md-6 mb-3">
                     <label for="serviceName">Service Name</label>
-                    <input type="text" class="form-control" id="serviceName" name="serviceName" title="Ex: EligibilityInterimDS Full V4">
+                    <input type="text" class="form-control" name="serviceName" [(ngModel)]="model.serviceName" #serviceName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && serviceName.invalid }" required />
+                    <div *ngIf="f.submitted && serviceName.invalid" class="invalid-feedback">
+                        <div *ngIf="serviceName.errors.required">Service Name is required</div>
+                    </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="serviceType">Service Type</label>
-                    <select class="custom-select">
+                    <select class="custom-select" name="serviceType" [(ngModel)]="model.serviceType" #serviceType="ngModel">
                         <option selected>Open this select menu</option>
                         <option value="CS">Connectivity Service</option>
                         <option value="DS">Data Service</option>
@@ -40,31 +88,49 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="version">Version</label>
-                    <input type="text" class="form-control" id="version" name="serviceName" value="0.1">
+                    <input type="text" class="form-control" name="version" [(ngModel)]="model.version" #version="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && version.invalid }" required />
+                    <div *ngIf="f.submitted && version.invalid" class="invalid-feedback">
+                        <div *ngIf="version.errors.required">Version is required</div>
+                    </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="previousVersion">Previous Version</label>
-                    <input type="text" class="form-control" id="previousVersion" name="serviceName" value="None">
+                    <input type="text" class="form-control" name="previousVersion" [(ngModel)]="model.previousVersion" #previousVersion="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && previousVersion.invalid }" required />
+                    <div *ngIf="f.submitted && previousVersion.invalid" class="invalid-feedback">
+                        <div *ngIf="previousVersion.errors.required">Previous Version is required. If none write 'none'</div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="startDate">Start Date</label>
-                    <input type="text" class="form-control" id="startDate" name="startDate">
+                    <input type="text" class="form-control" name="startDate" [(ngModel)]="model.startDate" #startDate="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && startDate.invalid }" required />
+                    <div *ngIf="f.submitted && startDate.invalid" class="invalid-feedback">
+                        <div *ngIf="startDate.errors.required">Start Date is required. If none write 'none'</div>
+                    </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="endDate">End Date</label>
-                    <input type="text" class="form-control" id="endDate" name="endDate">
+                    <input type="text" class="form-control" name="endDate" [(ngModel)]="model.endDate" #endDate="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && endDate.invalid }" required />
+                    <div *ngIf="f.submitted && endDate.invalid" class="invalid-feedback">
+                        <div *ngIf="endDate.errors.required">End Date Version is required. If none write 'none'</div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="icNumber">IC Number</label>
-                    <input type="text" class="form-control" id="icNumber" name="icNumber">
+                    <input type="text" class="form-control" name="icNumber" [(ngModel)]="model.icNumber" #icNumber="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && icNumber.invalid }" required />
+                    <div *ngIf="f.submitted && icNumber.invalid" class="invalid-feedback">
+                        <div *ngIf="icNumber.errors.required">ICNumber is required. If none write 'none'</div>
+                    </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" id="status" name="status">
+                    <input type="text" class="form-control" name="status" [(ngModel)]="model.status" #status="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && status.invalid }" required />
+                    <div *ngIf="f.submitted && status.invalid" class="invalid-feedback">
+                        <div *ngIf="status.errors.required">Status is required. If none write 'none'</div>
+                    </div>
                 </div>
             </div>
             <hr class="mb-4" />
