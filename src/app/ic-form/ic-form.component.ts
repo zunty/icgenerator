@@ -10,6 +10,7 @@ export class IcFormComponent implements OnInit {
   model: any = {};
 
   constructor() { }
+  message = this.model
 
   ngOnInit() {
   }

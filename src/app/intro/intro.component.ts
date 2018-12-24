@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-intro',
@@ -177,7 +177,7 @@ export class IntroComponent implements OnInit {
  { id: '5', issue: 'ClosedIssue1',  resolution: 'Done', responsability: 'João Ribeiro', targetDate: '25/12/2018', impactDate: '25/12/2018'},
   ]
 
-
+  @Input() message: string;
 
   constructor() { }
 

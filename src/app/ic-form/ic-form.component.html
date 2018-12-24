@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,50 +8,6 @@
 </head>
 
 <body>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <h3>Angular 6 Template-Driven Form Validation</h3>
-                    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required />
-                            <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
-                                <div *ngIf="firstName.errors.required">First Name is required</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required />
-                            <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
-                                <div *ngIf="lastName.errors.required">Last Name is required</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
-                            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
-                                <div *ngIf="email.errors.required">Email is required</div>
-                                <div *ngIf="email.errors.email">Email must be a valid email address</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" />
-                            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
-                                <div *ngIf="password.errors.required">Password is required</div>
-                                <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary">Register</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal text-white">eProseed</h5>
     </div>
@@ -161,4 +114,4 @@
     </div>
 </body>
 
-</html>
+<app-intro [message]="message"></app-intro>
