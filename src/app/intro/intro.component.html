@@ -1,5 +1,5 @@
 <h1 id="title-text" class="with-breadcrumbs">
-    <a href="/display/DMFC/ICTest">{{icNumber}} - {{message.serviceName}} {{virtualization}} Interface Contract</a>
+    <a href="/display/DMFC/ICTest">{{message.icNumber}} - {{message.serviceName}} {{virtualization}} Interface Contract</a>
 </h1>
 
 <div id="content" class="page view">
@@ -7,8 +7,7 @@
     <div id="main-content" class="wiki-content">
 
         <p>Document version:&nbsp;<strong>{{message.version}}</strong></p>
-        <p>Message:&nbsp;<strong>{{message.version}}</strong></p>
-        <div class="table-wrap" style="">
+        <div class="table-wrap">
             <table class="wrapped confluenceTable" resolved="">
                 <colgroup>
                     <col>
@@ -17,7 +16,7 @@
                 <thead>
                     <tr>
                         <th class="confluenceTh">Stream</th>
-                        <td class="confluenceTd">{{icNumber}}</td>
+                        <td class="confluenceTd">{{message.icNumber}}</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,8 +39,8 @@
                         <th colspan="1" class="confluenceTh">Stream Plan</th>
                         <td colspan="1" class="confluenceTd">
                             <div class="content-wrapper">
-                                <p>Start: {{startDate}}</p>
-                                <p>End: {{endDate}}</p>
+                                <p>Start: {{message.startDate}}</p>
+                                <p>End: {{message.endDate}}</p>
                             </div>
                         </td>
                     </tr>
@@ -53,79 +52,79 @@
         </div>
         <p><strong><br></strong></p>
 
-        <h1 id="{{icNumber}}-{{message.serviceName}}-">Table of Content</h1>
+        <h1 id="{{message.icNumber}}-{{message.serviceName}}-">Table of Content</h1>
         <p></p>
         <div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-hasbody="false" data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-macro-name="toc">
             <ul style="">
-                <li><span class="toc-item-body" data-outline="0.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-TableofContent" class="toc-link">Table of Content</a></span>
+                <li><span class="toc-item-body" data-outline="0.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-TableofContent" class="toc-link">Table of Content</a></span>
                 </li>
-                <li><span class="toc-item-body" data-outline="0.2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Document Control" class="toc-link">Document Control</a></span>
+                <li><span class="toc-item-body" data-outline="0.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Document Control" class="toc-link">Document Control</a></span>
                     <ul style="">
-                        <li><span class="toc-item-body" data-outline="0.2.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-ChangeRecord" class="toc-link">Change Record</a></span>
+                        <li><span class="toc-item-body" data-outline="0.2.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-ChangeRecord" class="toc-link">Change Record</a></span>
                         </li>
-                        <li><span class="toc-item-body" data-outline="0.2.2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Reviewers" class="toc-link">Reviewers&nbsp;</a></span>
+                        <li><span class="toc-item-body" data-outline="0.2.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Reviewers" class="toc-link">Reviewers&nbsp;</a></span>
                         </li>
                     </ul>
                 </li>
-                <li><span class="toc-item-body" data-outline="1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Introduction" class="toc-link">1. Introduction</a></span>
+                <li><span class="toc-item-body" data-outline="1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Introduction" class="toc-link">1. Introduction</a></span>
                     <ul style="">
-                        <li><span class="toc-item-body" data-outline="1.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Purpose" class="toc-link">1.1. Purpose</a></span>
+                        <li><span class="toc-item-body" data-outline="1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Purpose" class="toc-link">1.1. Purpose</a></span>
                         </li>
-                        <li><span class="toc-item-body" data-outline="1.2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Scope" class="toc-link">1.2. Scope</a></span>
+                        <li><span class="toc-item-body" data-outline="1.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Scope" class="toc-link">1.2. Scope</a></span>
                         </li>
-                        <li><span class="toc-item-body" data-outline="1.3"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Definitions,Acronyms,andAbbreviations" class="toc-link">1.3. Definitions, Acronyms, and Abbreviations</a></span>
+                        <li><span class="toc-item-body" data-outline="1.3"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Definitions,Acronyms,andAbbreviations" class="toc-link">1.3. Definitions, Acronyms, and Abbreviations</a></span>
                         </li>
-                        <li><span class="toc-item-body" data-outline="1.4"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-References" class="toc-link">1.4. References</a></span>
+                        <li><span class="toc-item-body" data-outline="1.4"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-References" class="toc-link">1.4. References</a></span>
                         </li>
                     </ul>
                 </li>
-                <li><span class="toc-item-body" data-outline="2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Definition" class="toc-link">2. Definition</a></span>
+                <li><span class="toc-item-body" data-outline="2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Definition" class="toc-link">2. Definition</a></span>
                     <ul style="">
-                        <li><span class="toc-item-body" data-outline="2.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Header" class="toc-link">2.1. Header</a></span>
+                        <li><span class="toc-item-body" data-outline="2.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Header" class="toc-link">2.1. Header</a></span>
                         </li>
-                        <li><span class="toc-item-body" data-outline="2.2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Interactions" class="toc-link">2.2. Interactions</a></span>
+                        <li><span class="toc-item-body" data-outline="2.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Interactions" class="toc-link">2.2. Interactions</a></span>
                         </li>
-                        <li><span class="toc-item-body" data-outline="2.3"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Description" class="toc-link">2.3. Description</a></span>
+                        <li><span class="toc-item-body" data-outline="2.3"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Description" class="toc-link">2.3. Description</a></span>
                         </li>
                     </ul>
                 </li>
-                <li><span class="toc-item-body" data-outline="3"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Functionality" class="toc-link">3. Functionality</a></span>
+                <li><span class="toc-item-body" data-outline="3"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Functionality" class="toc-link">3. Functionality</a></span>
                     <ul style="">
-                        <li><span class="toc-item-body" data-outline="3.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-ServiceOverview" class="toc-link">3.1. Service Overview</a></span>
+                        <li><span class="toc-item-body" data-outline="3.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-ServiceOverview" class="toc-link">3.1. Service Overview</a></span>
                             <ul style="">
-                                <li *ngFor="let endpoint of endpoints; index as i"><span class="toc-item-body" data-outline="3.1.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-{{endpoint.name}}" class="toc-link">3.1.{{i+1}}. {{endpoint.name}}</a></span>
+                                <li *ngFor="let endpoint of endpoints; index as i"><span class="toc-item-body" data-outline="3.1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}" class="toc-link">3.1.{{i+1}}. {{endpoint.name}}</a></span>
                                     <ul style="">
-                                        <li><span class="toc-item-body" data-outline="3.1.1.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Developmentenvironment" class="toc-link">3.1.{{i+1}}.1. Development environment</a></span>
+                                        <li><span class="toc-item-body" data-outline="3.1.1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Developmentenvironment" class="toc-link">3.1.{{i+1}}.1. Development environment</a></span>
                                         </li>
-                                        <li><span class="toc-item-body" data-outline="3.1.1.2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Testingenvironment" class="toc-link">3.1.{{i+1}}.2. Testing environment</a></span>
+                                        <li><span class="toc-item-body" data-outline="3.1.1.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Testingenvironment" class="toc-link">3.1.{{i+1}}.2. Testing environment</a></span>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><span class="toc-item-body" data-outline="3.1.3"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-Authentication" class="toc-link">3.1.3. Authentication</a></span>
+                                <li><span class="toc-item-body" data-outline="3.1.3"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Authentication" class="toc-link">3.1.3. Authentication</a></span>
                                 </li>
                             </ul>
                         </li>
-                        <li *ngFor="let operation of operations; index as i"><span class="toc-item-body" data-outline="3.2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-{{operation.name}}" class="toc-link">3.{{i+2}}. {{operation.name}}</a></span>
+                        <li *ngFor="let operation of operations; index as i"><span class="toc-item-body" data-outline="3.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}" class="toc-link">3.{{i+2}}. {{operation.name}}</a></span>
                             <ul style="">
-                                <li><span class="toc-item-body" data-outline="3.2.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-{{operation.name}}-Request" class="toc-link">3.{{i+2}}.1. Request</a></span>
+                                <li><span class="toc-item-body" data-outline="3.2.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-Request" class="toc-link">3.{{i+2}}.1. Request</a></span>
                                 </li>
-                                <li><span class="toc-item-body" data-outline="3.2.2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-{{operation.name}}-Response" class="toc-link">3.{{i+2}}.2. Response</a></span>
+                                <li><span class="toc-item-body" data-outline="3.2.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-Response" class="toc-link">3.{{i+2}}.2. Response</a></span>
                                 </li>
-                                <li><span class="toc-item-body" data-outline="3.2.3"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleRequest" class="toc-link">3.{{i+2}}.3. Sample {{operation.type}} Request</a></span>
+                                <li><span class="toc-item-body" data-outline="3.2.3"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleRequest" class="toc-link">3.{{i+2}}.3. Sample {{operation.type}} Request</a></span>
                                 </li>
-                                <li><span class="toc-item-body" data-outline="3.2.4"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleResponse" class="toc-link">3.{{i+2}}.4. Sample {{operation.type}} Response</a></span>
+                                <li><span class="toc-item-body" data-outline="3.2.4"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleResponse" class="toc-link">3.{{i+2}}.4. Sample {{operation.type}} Response</a></span>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
-                <li><span class="toc-item-body" data-outline="4"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-ResultCodes" class="toc-link">4. Result Codes</a></span>
+                <li><span class="toc-item-body" data-outline="4"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-ResultCodes" class="toc-link">4. Result Codes</a></span>
                 </li>
-                <li><span class="toc-item-body" data-outline="5"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-OpenandClosedIssues" class="toc-link">5. Open and Closed Issues</a></span>
+                <li><span class="toc-item-body" data-outline="5"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-OpenandClosedIssues" class="toc-link">5. Open and Closed Issues</a></span>
                     <ul style="">
-                        <li><span class="toc-item-body" data-outline="5.1"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-OpenIssues" class="toc-link">5.1. Open Issues</a></span>
+                        <li><span class="toc-item-body" data-outline="5.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-OpenIssues" class="toc-link">5.1. Open Issues</a></span>
                         </li>
-                        <li><span class="toc-item-body" data-outline="5.2"><span class="toc-outline"></span><a href="#{{icNumber}}-{{message.serviceName}}-ClosedIssues" class="toc-link">5.2. Closed Issues</a></span>
+                        <li><span class="toc-item-body" data-outline="5.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-ClosedIssues" class="toc-link">5.2. Closed Issues</a></span>
                         </li>
                     </ul>
                 </li>
@@ -133,8 +132,8 @@
         </div>
         <p></p>
 
-        <h1 id="{{icNumber}}-{{message.serviceName}}-Document Control">Document Control</h1>
-        <h2 id="{{icNumber}}-{{message.serviceName}}-ChangeRecord">Change Record</h2>
+        <h1 id="{{message.icNumber}}-{{message.serviceName}}-Document Control">Document Control</h1>
+        <h2 id="{{message.icNumber}}-{{message.serviceName}}-ChangeRecord">Change Record</h2>
         <div class="table-wrap" style="">
             <table class="relative-table wrapped confluenceTable tablesorter tablesorter-default stickyTableHeaders" style="width: 29.2736%; padding: 0px;" role="grid" resolved="">
                 <colgroup>
@@ -214,7 +213,7 @@
                 </tbody>
             </table>
         </div>
-        <h2 id="{{icNumber}}-{{message.serviceName}}-Reviewers">Reviewers&nbsp;</h2>
+        <h2 id="{{message.icNumber}}-{{message.serviceName}}-Reviewers">Reviewers&nbsp;</h2>
         <div class="table-wrap" style="">
             <table class="relative-table wrapped confluenceTable tablesorter tablesorter-default stickyTableHeaders" style="width: 17.5729%; padding: 0px;" role="grid" resolved="">
                 <colgroup>
@@ -281,16 +280,16 @@
             </table>
         </div>
         <div class="conf-macro output-block" data-hasbody="true" data-macro-name="numberedheadings">
-            <h1 id="{{icNumber}}-{{message.serviceName}}-Introduction"><span class="nh-number">1. </span>Introduction</h1>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-Purpose"><span class="nh-number">1.1. </span>Purpose</h2>
+            <h1 id="{{message.icNumber}}-{{message.serviceName}}-Introduction"><span class="nh-number">1. </span>Introduction</h1>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-Purpose"><span class="nh-number">1.1. </span>Purpose</h2>
             <p>The purpose of this Interface Contract is to describe the interface for <span>{{message.serviceName}}</span> service used to {{serviceDescription}}</p>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-Scope"><span class="nh-number">1.2. </span>Scope</h2>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-Scope"><span class="nh-number">1.2. </span>Scope</h2>
             <p>The following services are in the scope of this document:</p>
             <ul>
                 <li *ngFor="let service of scopeServices"><span><span>{{service}}</span></span>
                 </li>
             </ul>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-Definitions,Acronyms,andAbbreviations"><span class="nh-number">1.3. </span>Definitions, Acronyms, and Abbreviations</h2>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-Definitions,Acronyms,andAbbreviations"><span class="nh-number">1.3. </span>Definitions, Acronyms, and Abbreviations</h2>
             <p>The next table shows the acronyms used in this document</p>
             <div class="table-wrap" style="">
                 <table class="wrapped confluenceTable tablesorter tablesorter-default stickyTableHeaders" role="grid" resolved="" style="padding: 0px;">
@@ -338,7 +337,7 @@
                     </tbody>
                 </table>
             </div>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-References"><span class="nh-number">1.4. </span>References</h2>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-References"><span class="nh-number">1.4. </span>References</h2>
             <div class="table-wrap" style="">
                 <table class="wrapped confluenceTable tablesorter tablesorter-default stickyTableHeaders" role="grid" resolved="" style="padding: 0px;">
                     <colgroup>
@@ -385,8 +384,8 @@
                     </tbody>
                 </table>
             </div>
-            <h1 id="{{icNumber}}-{{message.serviceName}}-Definition"><span class="nh-number">2. </span>Definition</h1>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-Header"><span class="nh-number">2.1. </span>Header</h2>
+            <h1 id="{{message.icNumber}}-{{message.serviceName}}-Definition"><span class="nh-number">2. </span>Definition</h1>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-Header"><span class="nh-number">2.1. </span>Header</h2>
             <div class="table-wrap" style="">
                 <table class="wrapped confluenceTable" resolved="">
                     <colgroup>
@@ -412,11 +411,11 @@
                         </tr>
                         <tr>
                             <th class="confluenceTh"><strong>Previous Version</strong></th>
-                            <td class="confluenceTd">{{previousVersion}}</td>
+                            <td class="confluenceTd">{{message.previousVersion}}</td>
                         </tr>
                         <tr>
                             <th class="confluenceTh"><strong>Status</strong></th>
-                            <td class="confluenceTd">{{status}}</td>
+                            <td class="confluenceTd">{{message.status}}</td>
                         </tr>
                         <tr>
                             <th class="confluenceTh"><strong>Scope</strong></th>
@@ -429,7 +428,7 @@
                     </tbody>
                 </table>
             </div>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-Interactions"><span class="nh-number">2.2. </span>Interactions</h2>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-Interactions"><span class="nh-number">2.2. </span>Interactions</h2>
             <p>The interaction with this service meet the following characteristics:</p>
             <div class="table-wrap" style="">
                 <table class="wrapped confluenceTable" resolved="">
@@ -449,7 +448,7 @@
                     </tbody>
                 </table>
             </div>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-Description"><span class="nh-number">2.3. </span>Description</h2>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-Description"><span class="nh-number">2.3. </span>Description</h2>
             <p>The <span>{{message.serviceName}}</span><span> will have the following logic:</span></p>
             <ol>
                 <li *ngFor="let func of serviceFunctionalities"><span>{{func}};</span></li>
@@ -460,11 +459,11 @@
                 <br>
             </p>
 
-            <h1 id="{{icNumber}}-{{message.serviceName}}-Functionality"><span class="nh-number">3. </span>Functionality</h1>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-ServiceOverview"><span class="nh-number">3.1. </span>Service Overview</h2>
+            <h1 id="{{message.icNumber}}-{{message.serviceName}}-Functionality"><span class="nh-number">3. </span>Functionality</h1>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-ServiceOverview"><span class="nh-number">3.1. </span>Service Overview</h2>
             <div *ngFor="let endpoint of endpoints; index as i">
-                <h3 id="{{icNumber}}-{{message.serviceName}}-{{endpoint.name}}"><span class="nh-number">3.1.{{i+1}}. </span>{{endpoint.name}}</h3>
-                <h4 id="{{icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Developmentenvironment"><span class="nh-number">3.1.{{i+1}}.1. </span>Development environment</h4>
+                <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}"><span class="nh-number">3.1.{{i+1}}. </span>{{endpoint.name}}</h3>
+                <h4 id="{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Developmentenvironment"><span class="nh-number">3.1.{{i+1}}.1. </span>Development environment</h4>
                 <div class="table-wrap" style="">
                     <table class="wrapped confluenceTable" resolved="">
                         <tbody>
@@ -480,7 +479,7 @@
                         </tbody>
                     </table>
                 </div>
-                <h4 id="{{icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Testingenvironment"><span class="nh-number">3.{{i+1}}.1.2. </span>Testing environment</h4>
+                <h4 id="{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Testingenvironment"><span class="nh-number">3.{{i+1}}.1.2. </span>Testing environment</h4>
                 <div class="table-wrap" style="">
                     <table class="relative-table wrapped confluenceTable" style="width: 63.1875%;" resolved="">
                         <tbody>
@@ -497,12 +496,12 @@
                     </table>
                 </div>
             </div>
-            <h3 id="{{icNumber}}-{{message.serviceName}}-Authentication"><span class="nh-number">3.1.3. </span>Authentication</h3>
+            <h3 id="{{message.icNumber}}-{{message.serviceName}}-Authentication"><span class="nh-number">3.1.3. </span>Authentication</h3>
             <p>Not Applicable.</p>
 
             <div *ngFor="let operation of operations; index as i">
-                <h2 id="{{icNumber}}-{{message.serviceName}}-{{operation.name}}"><span class="nh-number">3.{{i+2}}. </span>{{operation.name}}</h2>
-                <h3 id="{{icNumber}}-{{message.serviceName}}-{{operation.name}}-Request"><span class="nh-number">3.{{i+2}}.1. </span>Request Schema</h3>
+                <h2 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}"><span class="nh-number">3.{{i+2}}. </span>{{operation.name}}</h2>
+                <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-Request"><span class="nh-number">3.{{i+2}}.1. </span>Request Schema</h3>
                 <p>
                     <br>
                 </p>
@@ -539,7 +538,7 @@
                 <p><span style="color: rgb(0,0,0);"><u><strong><br></strong></u></span></p>
                 <p><span style="color: rgb(0,0,0);"><u><strong><br></strong></u></span></p>
                 <br>
-                <h3 id="{{icNumber}}-{{message.serviceName}}-{{operation.name}}-Response"><span class="nh-number">3.{{i+2}}.2. </span>Response Schema</h3>
+                <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-Response"><span class="nh-number">3.{{i+2}}.2. </span>Response Schema</h3>
                 <p>
                     <br>
                 </p>
@@ -576,7 +575,7 @@
                 <p><span style="color: rgb(0,0,0);"><u><strong><br></strong></u></span></p>
                 <p><span style="color: rgb(0,0,0);"><u><strong><br></strong></u></span></p>
                 <br>
-                <h3 id="{{icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleRequest"><span class="nh-number">3.{{i+2}}.3. </span><span style="color: rgb(0,0,0);">Sample {{operation.type}} Request</span></h3>
+                <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleRequest"><span class="nh-number">3.{{i+2}}.3. </span><span style="color: rgb(0,0,0);">Sample {{operation.type}} Request</span></h3>
                 <div class="preformatted panel conf-macro output-block" data-hasbody="true" data-macro-name="noformat" style="border-width: 1px;">
                     <div class="preformattedContent panelContent">
                         <pre>{{operation.requestText | json}}</pre>
@@ -585,7 +584,7 @@
                 <p>
                     <br>
                 </p>
-                <h3 id="{{icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleResponse"><span class="nh-number">3.{{i+2}}.4. </span><span style="color: rgb(0,0,0);">Sample {{operation.type}} Response</span></h3>
+                <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleResponse"><span class="nh-number">3.{{i+2}}.4. </span><span style="color: rgb(0,0,0);">Sample {{operation.type}} Response</span></h3>
                 <div class="preformatted panel conf-macro output-block" data-hasbody="true" data-macro-name="noformat" style="border-width: 1px;">
                     <div class="preformattedContent panelContent">
                         <pre>{{operation.responseText | json}}</pre>
@@ -596,7 +595,7 @@
                 </p>
             </div>
 
-            <h1 id="{{icNumber}}-{{message.serviceName}}-ResultCodes"><span class="nh-number">4. </span>Artifacts</h1>
+            <h1 id="{{message.icNumber}}-{{message.serviceName}}-ResultCodes"><span class="nh-number">4. </span>Artifacts</h1>
             <p>The table below shows the result codes possible when calling this service. When returning Faults, the service will show the result code in the Fault Code. In case of success, the result will come in the header.</p>
             <div class="table-wrap" style="">
                 <table class="relative-table wrapped confluenceTable tablesorter tablesorter-default stickyTableHeaders" style="width: 34.8978%; padding: 0px;" role="grid" resolved="">
@@ -640,8 +639,8 @@
             <p>
                 <br>
             </p>
-            <h1 id="{{icNumber}}-{{message.serviceName}}-OpenandClosedIssues"><span class="nh-number">5. </span>Open and Closed Issues</h1>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-OpenIssues"><span class="nh-number">5.1. </span>Open Issues</h2>
+            <h1 id="{{message.icNumber}}-{{message.serviceName}}-OpenandClosedIssues"><span class="nh-number">5. </span>Open and Closed Issues</h1>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-OpenIssues"><span class="nh-number">5.1. </span>Open Issues</h2>
             <div class="table-wrap" style="">
                 <table class="wrapped confluenceTable tablesorter tablesorter-default stickyTableHeaders" role="grid" resolved="" style="padding: 0px;">
                     <colgroup>
@@ -733,7 +732,7 @@
                 </table>
             </div>
             <p>&nbsp;</p>
-            <h2 id="{{icNumber}}-{{message.serviceName}}-ClosedIssues"><span class="nh-number">5.2. </span>Closed Issues</h2>
+            <h2 id="{{message.icNumber}}-{{message.serviceName}}-ClosedIssues"><span class="nh-number">5.2. </span>Closed Issues</h2>
             <div class="table-wrap" style="">
                 <table class="wrapped confluenceTable tablesorter tablesorter-default stickyTableHeaders" role="grid" resolved="" style="padding: 0px;">
                     <colgroup>
