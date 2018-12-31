@@ -1,12 +1,11 @@
 <h1 id="title-text" class="with-breadcrumbs">
-    <a href="/display/DMFC/ICTest">{{message.icNumber}} - {{message.serviceName}} {{virtualization}} Interface Contract</a>
+    <a href="/display/DMFC/ICTest">{{message.icNumber}} - {{message.serviceName}} {{message.virtualization ? 'Virtualization' : ''}} Interface Contract</a>
 </h1>
 
 <div id="content" class="page view">
 
     <div id="main-content" class="wiki-content">
-
-        <p>Document version:&nbsp;<strong>{{message.version}}</strong></p>
+        <p>Document version:&nbsp;<strong>0.1</strong></p>
         <div class="table-wrap">
             <table class="wrapped confluenceTable" resolved="">
                 <colgroup>
@@ -39,8 +38,8 @@
                         <th colspan="1" class="confluenceTh">Stream Plan</th>
                         <td colspan="1" class="confluenceTd">
                             <div class="content-wrapper">
-                                <p>Start: {{message.startDate}}</p>
-                                <p>End: {{message.endDate}}</p>
+                                <p>Start: {{today | date:'dd/MM/yyyy'}}</p>
+                                <p>End: {{today | date:'dd/MM/yyyy'}}</p>
                             </div>
                         </td>
                     </tr>
@@ -104,7 +103,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li *ngFor="let operation of operations; index as i"><span class="toc-item-body" data-outline="3.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}" class="toc-link">3.{{i+2}}. {{operation.name}}</a></span>
+                        <li *ngFor="let operation of message.operations; index as i"><span class="toc-item-body" data-outline="3.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}" class="toc-link">3.{{i+2}}. {{operation.name}}</a></span>
                             <ul style="">
                                 <li><span class="toc-item-body" data-outline="3.2.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-Request" class="toc-link">3.{{i+2}}.1. Request</a></span>
                                 </li>
@@ -191,23 +190,23 @@
                     </tr>
                 </thead>
                 <tbody aria-live="polite" aria-relevant="all">
-                    <tr *ngFor="let reg of changesRegisters" role="row">
+                    <tr role="row">
                         <td class="confluenceTd">
                             <div class="content-wrapper">
                                 <p>
-                                    <time datetime="2018-07-31" class="date-past">{{reg.dateFormat2}}</time>&nbsp;</p>
+                                    <time datetime="2018-07-31" class="date-past">{{today | date:'dd/MM/yyyy'}}</time>&nbsp;</p>
                             </div>
                         </td>
                         <td class="confluenceTd">
                             <div class="content-wrapper">
-                                <p><a class="confluence-userlink user-mention userlink-0" data-username="{{reg.eproseedName}}" href="https://wiki.eproseed.com/display/~{{reg.eproseedName}}" data-linked-resource-id="24936636" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://wiki.eproseed.com/display/~" title="" data-user-hover-bound="true">{{reg.name}}</a></p>
+                                <p><a class="confluence-userlink user-mention userlink-0" data-username="{{message.eproseedName}}" href="https://wiki.eproseed.com/display/~{{message.eproseedName}}" data-linked-resource-id="24936636" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://wiki.eproseed.com/display/~" title="" data-user-hover-bound="true">{{message.author}}</a></p>
                             </div>
                         </td>
                         <td class="confluenceTd">
-                            <p>{{reg.version}}</p>
+                            <p>0.1</p>
                         </td>
                         <td class="confluenceTd">
-                            <p>{{reg.changes}}</p>
+                            <p>Initial Version</p>
                         </td>
                     </tr>
                 </tbody>
@@ -260,20 +259,19 @@
                     </tr>
                 </thead>
                 <tbody aria-live="polite" aria-relevant="all">
-                    <tr *ngFor="let reg2 of reviewersRegisters" role="row">
+                    <tr *ngFor="let reg2 of [0,1]" role="row">
                         <td class="confluenceTd">
                             <div class="content-wrapper">
-                                <p>
-                                    <time datetime="2018-12-04" class="date-past">{{reg2.dateFormat2}}</time>&nbsp;</p>
+                                <p>&nbsp;</p>
                             </div>
                         </td>
                         <td class="confluenceTd">
                             <div class="content-wrapper">
-                                <p><a class="confluence-userlink user-mention userlink-1" data-username="{{reg2.eproseedName}}" href="https://wiki.eproseed.com/display/~{{reg2.eproseedName}}" data-linked-resource-id="10649702" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://wiki.eproseed.com" title="" data-user-hover-bound="true">{{reg2.name}}</a></p>
+                                <p>&nbsp;</p>
                             </div>
                         </td>
                         <td class="confluenceTd">
-                            <p>{{reg2.position}}</p>
+                            <p>&nbsp;</p>
                         </td>
                     </tr>
                 </tbody>
@@ -282,11 +280,11 @@
         <div class="conf-macro output-block" data-hasbody="true" data-macro-name="numberedheadings">
             <h1 id="{{message.icNumber}}-{{message.serviceName}}-Introduction"><span class="nh-number">1. </span>Introduction</h1>
             <h2 id="{{message.icNumber}}-{{message.serviceName}}-Purpose"><span class="nh-number">1.1. </span>Purpose</h2>
-            <p>The purpose of this Interface Contract is to describe the interface for <span>{{message.serviceName}}</span> service used to {{serviceDescription}}</p>
+            <p>The purpose of this Interface Contract is to describe the interface for <span>{{message.serviceName}}</span> service used to {{message.description}}</p>
             <h2 id="{{message.icNumber}}-{{message.serviceName}}-Scope"><span class="nh-number">1.2. </span>Scope</h2>
             <p>The following services are in the scope of this document:</p>
             <ul>
-                <li *ngFor="let service of scopeServices"><span><span>{{service}}</span></span>
+                <li *ngFor="let service of message.scopeServices"><span><span>{{service}}</span></span>
                 </li>
             </ul>
             <h2 id="{{message.icNumber}}-{{message.serviceName}}-Definitions,Acronyms,andAbbreviations"><span class="nh-number">1.3. </span>Definitions, Acronyms, and Abbreviations</h2>
@@ -326,7 +324,7 @@
                         </tr>
                     </thead>
                     <tbody aria-live="polite" aria-relevant="all">
-                        <tr *ngFor="let def of definition" role="row">
+                        <tr *ngFor="let def of message.definitions" role="row">
                             <td class="confluenceTd">
                                 <p><strong>{{def.acronym}}</strong></p>
                             </td>
@@ -369,7 +367,7 @@
                         </tr>
                     </thead>
                     <tbody aria-live="polite" aria-relevant="all">
-                        <tr *ngFor="let ref of references" role="row">
+                        <tr *ngFor="let ref of message.references" role="row">
                             <td class="confluenceTd">
                                 <span>
                             		<a href="{{ref.url}}">
@@ -403,15 +401,15 @@
                         </tr>
                         <tr>
                             <th class="confluenceTh"><strong>Service Contract ID</strong></th>
-                            <td class="confluenceTd"><span>{{message.serviceName}} {{virtualization}}</span></td>
+                            <td class="confluenceTd"><span>{{message.serviceName}} {{message.virtualization ? 'Virtualization' : ''}}</span></td>
                         </tr>
                         <tr>
                             <th class="confluenceTh"><strong>Contract Version</strong></th>
-                            <td class="confluenceTd">{{message.version}}</td>
+                            <td class="confluenceTd">0.1</td>
                         </tr>
                         <tr>
                             <th class="confluenceTh"><strong>Previous Version</strong></th>
-                            <td class="confluenceTd">{{message.previousVersion}}</td>
+                            <td class="confluenceTd">None</td>
                         </tr>
                         <tr>
                             <th class="confluenceTh"><strong>Status</strong></th>
@@ -423,7 +421,7 @@
                         </tr>
                         <tr>
                             <th class="confluenceTh"><strong>Type</strong></th>
-                            <td class="confluenceTd">{{serviceType}}</td>
+                            <td class="confluenceTd">{{message.serviceType}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -443,7 +441,7 @@
                         </tr>
                         <tr>
                             <th class="confluenceTh">Protocol</th>
-                            <td class="confluenceTd">{{protocol}}</td>
+                            <td class="confluenceTd">{{message.rest && message.soap ? 'SOAP/REST' : ''}}{{!message.rest && message.soap ? 'SOAP' : ''}}{{message.rest && !message.soap ? 'REST' : ''}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -461,7 +459,7 @@
 
             <h1 id="{{message.icNumber}}-{{message.serviceName}}-Functionality"><span class="nh-number">3. </span>Functionality</h1>
             <h2 id="{{message.icNumber}}-{{message.serviceName}}-ServiceOverview"><span class="nh-number">3.1. </span>Service Overview</h2>
-            <div *ngFor="let endpoint of endpoints; index as i">
+            <div *ngFor="let endpoint of message.endpoints; index as i">
                 <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}"><span class="nh-number">3.1.{{i+1}}. </span>{{endpoint.name}}</h3>
                 <h4 id="{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Developmentenvironment"><span class="nh-number">3.1.{{i+1}}.1. </span>Development environment</h4>
                 <div class="table-wrap" style="">
@@ -469,11 +467,11 @@
                         <tbody>
                             <tr>
                                 <th colspan="1" class="confluenceTh">WSDL</th>
-                                <td colspan="1" class="confluenceTd"><span class="nolink"><a class="external-link" href="{{devURL}}{{endpoint.endpoint}}?WSDL" rel="nofollow">{{devURL}}{{endpoint.endpoint}}?WSDL</a></span></td>
+                                <td colspan="1" class="confluenceTd"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{endpoint.endpoint}}?WSDL" rel="nofollow">{{message.devURL}}{{endpoint.endpoint}}?WSDL</a></span></td>
                             </tr>
                             <tr>
                                 <th class="confluenceTh">REST Endpoint</th>
-                                <td class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{devURL}}{{endpoint.endpoint}}" rel="nofollow">{{devURL}}{{endpoint.endpoint}}</a></span></span>
+                                <td class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{endpoint.endpoint}}" rel="nofollow">{{message.devURL}}{{endpoint.endpoint}}</a></span></span>
                                 </td>
                             </tr>
                         </tbody>
@@ -499,7 +497,7 @@
             <h3 id="{{message.icNumber}}-{{message.serviceName}}-Authentication"><span class="nh-number">3.1.3. </span>Authentication</h3>
             <p>Not Applicable.</p>
 
-            <div *ngFor="let operation of operations; index as i">
+            <div *ngFor="let operation of message.operations; index as i">
                 <h2 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}"><span class="nh-number">3.{{i+2}}. </span>{{operation.name}}</h2>
                 <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-Request"><span class="nh-number">3.{{i+2}}.1. </span>Request Schema</h3>
                 <p>
@@ -578,7 +576,7 @@
                 <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleRequest"><span class="nh-number">3.{{i+2}}.3. </span><span style="color: rgb(0,0,0);">Sample {{operation.type}} Request</span></h3>
                 <div class="preformatted panel conf-macro output-block" data-hasbody="true" data-macro-name="noformat" style="border-width: 1px;">
                     <div class="preformattedContent panelContent">
-                        <pre>{{operation.requestText | json}}</pre>
+                        <pre>{{message.soapEndpoint | json}}</pre>
                     </div>
                 </div>
                 <p>
@@ -625,7 +623,7 @@
                         </tr>
                     </thead>
                     <tbody aria-live="polite" aria-relevant="all">
-                        <tr *ngFor="let result of resultCodes" role="row">
+                        <tr *ngFor="let result of message.resultCodes" role="row">
                             <td class="confluenceTd">
                                 <p>{{result.code}}</p>
                             </td>
@@ -720,7 +718,7 @@
                         </tr>
                     </thead>
                     <tbody aria-live="polite" aria-relevant="all">
-                        <tr *ngFor="let openiss of openIssues" role="row">
+                        <tr *ngFor="let openiss of message.openIssues" role="row">
                             <td class="confluenceTd">{{openiss.id}}</td>
                             <td class="confluenceTd">{{openiss.issue}}</td>
                             <td class="confluenceTd">{{openiss.resolution}}</td>
@@ -812,7 +810,7 @@
                         </tr>
                     </thead>
                     <tbody aria-live="polite" aria-relevant="all">
-                        <tr *ngFor="let closediss of closedIssues" role="row">
+                        <tr *ngFor="let closediss of message.closedIssues" role="row">
                             <td class="confluenceTd">{{closediss.id}}</td>
                             <td class="confluenceTd">{{closediss.issue}}</td>
                             <td class="confluenceTd">{{closediss.resolution}}</td>
