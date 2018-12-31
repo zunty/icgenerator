@@ -30,44 +30,12 @@
                     <label for="serviceType">Service Type</label>
                     <select class="custom-select" name="serviceType" [(ngModel)]="model.serviceType" #serviceType="ngModel">
                         <option selected>Open this select menu</option>
-                        <option value="CS">Connectivity Service</option>
-                        <option value="DS">Data Service</option>
-                        <option value="BAS">Business Activity Service</option>
-                        <option value="BPS">Business Process Service</option>
-                        <option value="DECS">Decision Service</option>
+                        <option value="Connectivity Service">Connectivity Service</option>
+                        <option value="Data Service">Data Service</option>
+                        <option value="Business Activity Service">Business Activity Service</option>
+                        <option value="Business Process Service">Business Process Service</option>
+                        <option value="Decision Service">Decision Service</option>
                     </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="version">Version</label>
-                    <input type="text" class="form-control" name="version" [(ngModel)]="model.version" #version="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && version.invalid }" required />
-                    <div *ngIf="f.submitted && version.invalid" class="invalid-feedback">
-                        <div *ngIf="version.errors.required">Version is required</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="previousVersion">Previous Version</label>
-                    <input type="text" class="form-control" name="previousVersion" [(ngModel)]="model.previousVersion" #previousVersion="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && previousVersion.invalid }" required />
-                    <div *ngIf="f.submitted && previousVersion.invalid" class="invalid-feedback">
-                        <div *ngIf="previousVersion.errors.required">Previous Version is required. If none write 'none'</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="startDate">Start Date</label>
-                    <input type="text" class="form-control" name="startDate" [(ngModel)]="model.startDate" #startDate="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && startDate.invalid }" required />
-                    <div *ngIf="f.submitted && startDate.invalid" class="invalid-feedback">
-                        <div *ngIf="startDate.errors.required">Start Date is required. If none write 'none'</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="endDate">End Date</label>
-                    <input type="text" class="form-control" name="endDate" [(ngModel)]="model.endDate" #endDate="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && endDate.invalid }" required />
-                    <div *ngIf="f.submitted && endDate.invalid" class="invalid-feedback">
-                        <div *ngIf="endDate.errors.required">End Date Version is required. If none write 'none'</div>
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -86,28 +54,90 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <div>
+                    <label for="description">Service Description</label>
+                    <input type="text" class="form-control" name="description" [(ngModel)]="model.description" #description="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" required />
+                    <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+                        <div *ngIf="description.errors.required">Service description is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" name="author" [(ngModel)]="model.author" #author="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && author.invalid }" required />
+                    <div *ngIf="f.submitted && author.invalid" class="invalid-feedback">
+                        <div *ngIf="author.errors.required">author is required</div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="eproseedName">Eproseed Name</label>
+                    <input type="text" class="form-control" name="eproseedName" [(ngModel)]="model.eproseedName" #eproseedName="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && eproseedName.invalid }" required />
+                    <div *ngIf="f.submitted && eproseedName.invalid" class="invalid-feedback">
+                        <div *ngIf="eproseedName.errors.required">eproseedName is required. If none write 'none'</div>
+                    </div>
+                </div>
+            </div>        
+            <div class="form-group">
+                <label>Services Related</label>
+                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add related service</button>
+                <input type="text" class="form-control" name="description" [(ngModel)]="model.relatedServices" #description="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"/>
+                <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+                </div>
+                <div *ngFor="let reg2 of groupList; index as i" >
+                    <input type="text" class="form-control my-1" value="{{reg2[i]}}">
+                  </div>
+            </div>
+            <div class="form-group">
+                <label>References</label>
+                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add reference</button>
+                <input type="text" class="form-control" name="description" [(ngModel)]="model.relatedServices" #description="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"/>
+                <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+                </div>
+                <div *ngFor="let reg2 of groupList; index as i" >
+                    <input type="text" class="form-control my-1" value="{{reg2[i]}}">
+                  </div>
+            </div>            
+            <div class="form-group">
+                <label>Service Functionalities</label>
+                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add service functionality</button>
+                <input type="text" class="form-control" name="description" [(ngModel)]="model.relatedServices" #description="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"/>
+                <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+                </div>
+                <div *ngFor="let reg2 of groupList; index as i" >
+                    <input type="text" class="form-control my-1" value="{{reg2[i]}}">
+                  </div>
+            </div>
             <hr class="mb-4" />
             <div class="row checkbox-row">
                 <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline" id="virtualization">
+                    <input type="checkbox" class="checkbox-inline" name="virtualization" [(ngModel)]="model.virtualization" #virtualization="ngModel" value="0.1">
                     <label for="virtualization">Virtualization</label>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline" id="soap">
+                    <input type="checkbox" class="checkbox-inline" name="soap" [(ngModel)]="model.soap" #soap="ngModel" value="0.1">
                     <label for="sopa">SOAP</label>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline" id="rest">
+                    <input type="checkbox" class="checkbox-inline"name="rest" [(ngModel)]="model.rest" #rest="ngModel" value="0.1">
                     <label for="rest">REST</label>
                 </div>
             </div>
-            <hr class="mb-4" />
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <button class="btn btn-secondary btn-lg btn-block" type="submit">Extract</button>
+                    <label for="soapEndpoint">SOAP Endpoint</label>
+                    <input type="text" class="form-control" name="soapEndpoint" [(ngModel)]="model.soapEndpoint" #soapEndpoint="ngModel" value="0.1"/>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <button class="btn btn-secondary btn-lg btn-block" type="submit">Skip</button>
+                    <label for="restEndpoint">REST Endpoint</label>
+                    <input type="text" class="form-control" name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel" value="0.1"/>
+                </div>
+            </div> 
+            <hr class="mb-4" />
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-secondary btn-lg center-block" type="submit" (click)="copyToClipboard()">Copy WIKI Content</button>
                 </div>
             </div>
         </form>
