@@ -27,13 +27,14 @@ export class IcFormComponent implements OnInit {
     this.model.description = 'Do important things'
     this.model.author = 'João Ribeiro'
     this.model.eproseedName = 'jribeiro'
+    this.model.soap = 'true'
     this.model.soapEndpoint = 'soapEndpointURL'
+    this.model.rest = 'true'
     this.model.restEndpoint = 'restEndpointURL'
 
   // Introduction Section:
   //1.2. Service Scope
     this.model.scopeServices = [
-    this.model.serviceName.stringify,
     'ReviewClaimDataEntryDS',
     'ReviewClaimDataEntryDS',
     'ReviewClaimDataEntryDS'
@@ -173,9 +174,20 @@ export class IcFormComponent implements OnInit {
     
   }
 
-  addElement(name) {
-    console.log(this.groupList)
-    this.groupList.push(name);
+  addScopeService(name) {
+    this.model.scopeServices.push(name);
+  }
+
+  addReferences(givenname,givenurl,givenversion) {
+    console.log(this.model);
+    var newRef = [
+      {docReference: givenname, url: givenurl, version: givenversion},
+    ]
+    this.model.references.push(newRef[0]);
+  }
+
+  addServiceFunctionalities(name) {
+    this.model.serviceFunctionalities.push(name);
   }
 
   onSubmit() {

@@ -461,9 +461,9 @@
                 </table>
             </div>
             <h2 id="{{message.icNumber}}-{{message.serviceName}}-Description"><span class="nh-number">2.3. </span>Description</h2>
-            <p>The <span>{{message.serviceName}}</span><span> will have the following logic:</span></p>
+            <p>The <span>{{message.serviceName}}</span><span> service will have the following functionalities:</span></p>
             <ol>
-                <li *ngFor="let func of serviceFunctionalities"><span>{{func}};</span></li>
+                <li *ngFor="let func of message.serviceFunctionalities"><span>{{func}};</span></li>
             </ol>
             <p>The structure of the service is the following:</p>
             <p>((INSERT IMAGE OF SERVICE FROM ARIS))</p>

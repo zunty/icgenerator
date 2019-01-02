@@ -90,34 +90,26 @@
             </div>        
             <div class="form-group">
                 <label>Services Related</label>
-                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add related service</button>
-                <input type="text" class="form-control" name="servicesRelated" [(ngModel)]="model.relatedServices" #servicesRelated="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && servicesRelated.invalid }"/>
-                <div *ngIf="f.submitted && servicesRelated.invalid" class="invalid-feedback">
-                </div>
-                <div *ngFor="let reg2 of groupList; index as i" >
-                    <input type="text" class="form-control my-1" value="{{reg2[i]}}">
-                  </div>
+                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addScopeService(servicesRelated.value)">Add related service</button>
+                <input type="text" class="form-control" name="servicesRelated" [(ngModel)]="model.servicesRelated" #servicesRelated="ngModel"/>
+                <ul><li *ngFor="let scopeServ of model.scopeServices">{{scopeServ}}</li></ul>
             </div>
             <div class="form-group">
                 <label>References</label>
-                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add reference</button>
-                <input type="text" class="form-control" name="references" [(ngModel)]="model.relatedServices" #references="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && references.invalid }"/>
-                <div *ngIf="f.submitted && references.invalid" class="invalid-feedback">
-                </div>
-                <div *ngFor="let reg2 of groupList; index as i" >
-                    <input type="text" class="form-control my-1" value="{{reg2[i]}}">
-                  </div>
-            </div>            
-            <div class="form-group">
-                <label>Service Functionalities</label>
-                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add service functionality</button>
-                <input type="text" class="form-control" name="functionalities" [(ngModel)]="model.relatedServices" #functionalities="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && functionalities.invalid }"/>
-                <div *ngIf="f.submitted && functionalities.invalid" class="invalid-feedback">
-                </div>
-                <div *ngFor="let reg2 of groupList; index as i" >
-                    <input type="text" class="form-control my-1" value="{{reg2[i]}}">
-                  </div>
+                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addReferences(referenceName.value,referenceUrl.value,referenceVersion.value)">Add reference</button>
             </div>
+            <div class="row">
+                <div class="col-md-4 mb-3"><input type="text" class="form-control" name="referenceName" [(ngModel)]="model.referenceName" #referenceName="ngModel"/></div>
+                <div class="col-md-4 mb-3"><input type="text" class="form-control" name="referenceUrl" [(ngModel)]="model.referenceUrl" #referenceUrl="ngModel"/></div>
+                <div class="col-md-4 mb-3"><input type="text" class="form-control" name="referenceVersion" [(ngModel)]="model.referenceVersion" #referenceVersion="ngModel"/></div>
+            </div>
+            <div><ul><li *ngFor="let refer of model.references">{{refer.docReference}} - {{refer.url}} - {{refer.version}}</li></ul></div>                    
+            <div class="form-group">
+                        <label>Service Functionalities</label>
+                        <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addServiceFunctionalities(functionalities.value)">Add new service functionality</button>
+                        <input type="text" class="form-control" name="functionalities" [(ngModel)]="model.functionalities" #functionalities="ngModel"/>
+                        <ul><li *ngFor="let servFunc of model.serviceFunctionalities">{{servFunc}}</li></ul>
+            </div>    
             <hr class="mb-4" />
             <div class="row checkbox-row">
                 <div class="col-md-4 mb-3">
