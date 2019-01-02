@@ -91,15 +91,29 @@
                     <ul style="">
                         <li><span class="toc-item-body" data-outline="3.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-ServiceOverview" class="toc-link">3.1. Service Overview</a></span>
                             <ul style="">
-                                <li *ngFor="let endpoint of endpoints; index as i"><span class="toc-item-body" data-outline="3.1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}" class="toc-link">3.1.{{i+1}}. {{endpoint.name}}</a></span>
+                                <li *ngIf="message.soap"><span class="toc-item-body" data-outline="3.1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-soap" class="toc-link">3.1.1. SOAP Endpoint</a></span>
                                     <ul style="">
-                                        <li><span class="toc-item-body" data-outline="3.1.1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Developmentenvironment" class="toc-link">3.1.{{i+1}}.1. Development environment</a></span>
+                                        <li><span class="toc-item-body" data-outline="3.1.1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-soap-Developmentenvironment" class="toc-link">3.1.1.1. Development environment</a></span>
                                         </li>
-                                        <li><span class="toc-item-body" data-outline="3.1.1.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Testingenvironment" class="toc-link">3.1.{{i+1}}.2. Testing environment</a></span>
+                                        <li><span class="toc-item-body" data-outline="3.1.1.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-soap-Testingenvironment" class="toc-link">3.1.1.2. Testing environment</a></span>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><span class="toc-item-body" data-outline="3.1.3"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-Authentication" class="toc-link">3.1.3. Authentication</a></span>
+                                <li *ngIf="!message.soap && message.rest"><span class="toc-item-body" data-outline="3.1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-rest" class="toc-link">3.1.1. REST Endpoint</a></span>
+                                    <ul style="">
+                                        <li><span class="toc-item-body" data-outline="3.1.1.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-rest-Developmentenvironment" class="toc-link">3.1.1.1. Development environment</a></span>
+                                        </li>
+                                        <li><span class="toc-item-body" data-outline="3.1.1.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-rest-Testingenvironment" class="toc-link">3.1.1.2. Testing environment</a></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li *ngIf="message.soap && message.rest"><span class="toc-item-body" data-outline="3.1.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-rest" class="toc-link">3.1.2. REST Endpoint</a></span>
+                                    <ul style="">
+                                        <li><span class="toc-item-body" data-outline="3.1.2.1"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-rest-Developmentenvironment" class="toc-link">3.1.2.1. Development environment</a></span>
+                                        </li>
+                                        <li><span class="toc-item-body" data-outline="3.1.2.2"><span class="toc-outline"></span><a href="#{{message.icNumber}}-{{message.serviceName}}-rest-Testingenvironment" class="toc-link">3.1.2.2. Testing environment</a></span>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -459,43 +473,111 @@
 
             <h1 id="{{message.icNumber}}-{{message.serviceName}}-Functionality"><span class="nh-number">3. </span>Functionality</h1>
             <h2 id="{{message.icNumber}}-{{message.serviceName}}-ServiceOverview"><span class="nh-number">3.1. </span>Service Overview</h2>
-            <div *ngFor="let endpoint of message.endpoints; index as i">
-                <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}"><span class="nh-number">3.1.{{i+1}}. </span>{{endpoint.name}}</h3>
-                <h4 id="{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Developmentenvironment"><span class="nh-number">3.1.{{i+1}}.1. </span>Development environment</h4>
+            <div *ngIf="message.soap">
+                <h3 id="{{message.icNumber}}-{{message.serviceName}}-soap"><span class="nh-number">3.1.1. </span>SOAP Endpoint</h3>
+                <h4 id="{{message.icNumber}}-{{message.serviceName}}-soap-Developmentenvironment"><span class="nh-number">3.1.1.1. </span>Development environment</h4>
                 <div class="table-wrap" style="">
                     <table class="wrapped confluenceTable" resolved="">
                         <tbody>
                             <tr>
                                 <th colspan="1" class="confluenceTh">WSDL</th>
-                                <td colspan="1" class="confluenceTd"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{endpoint.endpoint}}?WSDL" rel="nofollow">{{message.devURL}}{{endpoint.endpoint}}?WSDL</a></span></td>
+                                <td colspan="1" class="confluenceTd"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{message.soapEndpoint}}?WSDL" rel="nofollow">{{message.devURL}}{{message.soapEndpoint}}?WSDL</a></span></td>
                             </tr>
                             <tr>
-                                <th class="confluenceTh">REST Endpoint</th>
-                                <td class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{endpoint.endpoint}}" rel="nofollow">{{message.devURL}}{{endpoint.endpoint}}</a></span></span>
+                                <th class="confluenceTh">SOAP Endpoint</th>
+                                <td class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{message.soapEndpoint}}" rel="nofollow">{{message.devURL}}{{message.soapEndpoint}}</a></span></span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <h4 id="{{message.icNumber}}-{{message.serviceName}}-{{endpoint.name}}-Testingenvironment"><span class="nh-number">3.{{i+1}}.1.2. </span>Testing environment</h4>
+                <h4 id="{{message.icNumber}}-{{message.serviceName}}-soap-Testingenvironment"><span class="nh-number">3.1.1.2. </span>Testing environment</h4>
                 <div class="table-wrap" style="">
-                    <table class="relative-table wrapped confluenceTable" style="width: 63.1875%;" resolved="">
+                    <table class="relative-table wrapped confluenceTable" resolved="">
                         <tbody>
                             <tr>
                                 <th colspan="1" class="confluenceTh">WSDL</th>
-                                <td colspan="1" class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{testURL}}{{endpoint.endpoint}}?WSDL" rel="nofollow">{{testURL}}{{endpoint.endpoint}}?WSDL</a></span></span>
+                                <td colspan="1" class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{message.testURL}}{{message.soapEndpoint}}?WSDL" rel="nofollow">{{message.testURL}}{{message.soapEndpoint}}?WSDL</a></span></span>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="confluenceTh">REST Endpoint</th>
-                                <td class="confluenceTd"><a class="external-link" href="{{testURL}}{{endpoint.endpoint}}" rel="nofollow">{{testURL}}{{endpoint.endpoint}}</a></td>
+                                <th class="confluenceTh">SOAP Endpoint</th>
+                                <td class="confluenceTd"><a class="external-link" href="{{message.testURL}}{{message.soapEndpoint}}" rel="nofollow">{{message.testURL}}{{message.soapEndpoint}}</a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <h3 id="{{message.icNumber}}-{{message.serviceName}}-Authentication"><span class="nh-number">3.1.3. </span>Authentication</h3>
-            <p>Not Applicable.</p>
+			<div *ngIf="!message.soap && message.rest">
+                <h3 id="{{message.icNumber}}-{{message.serviceName}}-rest"><span class="nh-number">3.1.1. </span>REST Endpoint</h3>
+                <h4 id="{{message.icNumber}}-{{message.serviceName}}-rest-Developmentenvironment"><span class="nh-number">3.1.1.1. </span>Development environment</h4>
+                <div class="table-wrap" style="">
+                    <table class="wrapped confluenceTable" resolved="">
+                        <tbody>
+                            <tr>
+                                <th colspan="1" class="confluenceTh">WSDL</th>
+                                <td colspan="1" class="confluenceTd"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{message.restEndpoint}}?WSDL" rel="nofollow">{{message.devURL}}{{message.restEndpoint}}?WSDL</a></span></td>
+                            </tr>
+                            <tr>
+                                <th class="confluenceTh">REST Endpoint</th>
+                                <td class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{message.restEndpoint}}" rel="nofollow">{{message.devURL}}{{message.restEndpoint}}</a></span></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4 id="{{message.icNumber}}-{{message.serviceName}}-rest-Testingenvironment"><span class="nh-number">3.1.1.2. </span>Testing environment</h4>
+                <div class="table-wrap" style="">
+                    <table class="relative-table wrapped confluenceTable" resolved="">
+                        <tbody>
+                            <tr>
+                                <th colspan="1" class="confluenceTh">WSDL</th>
+                                <td colspan="1" class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{message.testURL}}{{message.restEndpoint}}?WSDL" rel="nofollow">{{message.testURL}}{{message.restEndpoint}}?WSDL</a></span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="confluenceTh">REST Endpoint</th>
+                                <td class="confluenceTd"><a class="external-link" href="{{message.testURL}}{{message.restEndpoint}}" rel="nofollow">{{message.testURL}}{{message.restEndpoint}}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+			<div *ngIf="message.soap && message.rest">
+                <h3 id="{{message.icNumber}}-{{message.serviceName}}-rest"><span class="nh-number">3.1.2. </span>REST Endpoint</h3>
+                <h4 id="{{message.icNumber}}-{{message.serviceName}}-rest-Developmentenvironment"><span class="nh-number">3.1.2.1. </span>Development environment</h4>
+                <div class="table-wrap" style="">
+                    <table class="wrapped confluenceTable" resolved="">
+                        <tbody>
+                            <tr>
+                                <th colspan="1" class="confluenceTh">WSDL</th>
+                                <td colspan="1" class="confluenceTd"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{message.restEndpoint}}?WSDL" rel="nofollow">{{message.devURL}}{{message.restEndpoint}}?WSDL</a></span></td>
+                            </tr>
+                            <tr>
+                                <th class="confluenceTh">REST Endpoint</th>
+                                <td class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{message.devURL}}{{message.restEndpoint}}" rel="nofollow">{{message.devURL}}{{message.restEndpoint}}</a></span></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4 id="{{message.icNumber}}-{{message.serviceName}}-rest-Testingenvironment"><span class="nh-number">3.1.2.2. </span>Testing environment</h4>
+                <div class="table-wrap" style="">
+                    <table class="relative-table wrapped confluenceTable" resolved="">
+                        <tbody>
+                            <tr>
+                                <th colspan="1" class="confluenceTh">WSDL</th>
+                                <td colspan="1" class="confluenceTd"><span class="nolink"><span class="nolink"><a class="external-link" href="{{message.testURL}}{{message.restEndpoint}}?WSDL" rel="nofollow">{{message.testURL}}{{message.restEndpoint}}?WSDL</a></span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="confluenceTh">REST Endpoint</th>
+                                <td class="confluenceTd"><a class="external-link" href="{{message.testURL}}{{message.restEndpoint}}" rel="nofollow">{{message.testURL}}{{message.restEndpoint}}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>            
 
             <div *ngFor="let operation of message.operations; index as i">
                 <h2 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}"><span class="nh-number">3.{{i+2}}. </span>{{operation.name}}</h2>

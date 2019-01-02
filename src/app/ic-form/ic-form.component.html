@@ -25,6 +25,7 @@
                     <div *ngIf="f.submitted && serviceName.invalid" class="invalid-feedback">
                         <div *ngIf="serviceName.errors.required">Service Name is required</div>
                     </div>
+                    <div class="invalid-feedback">Example invalid custom select feedback</div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="serviceType">Service Type</label>
@@ -78,12 +79,22 @@
                         <div *ngIf="eproseedName.errors.required">eproseedName is required. If none write 'none'</div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="soapEndpoint">SOAP Endpoint</label>
+                    <input type="text" class="form-control" name="soapEndpoint" [(ngModel)]="model.soapEndpoint" #soapEndpoint="ngModel"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="restEndpoint">REST Endpoint</label>
+                    <input type="text" class="form-control" name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel"/>
+                </div>
             </div>        
             <div class="form-group">
                 <label>Services Related</label>
                 <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add related service</button>
-                <input type="text" class="form-control" name="description" [(ngModel)]="model.relatedServices" #description="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"/>
-                <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+                <input type="text" class="form-control" name="servicesRelated" [(ngModel)]="model.relatedServices" #servicesRelated="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && servicesRelated.invalid }"/>
+                <div *ngIf="f.submitted && servicesRelated.invalid" class="invalid-feedback">
                 </div>
                 <div *ngFor="let reg2 of groupList; index as i" >
                     <input type="text" class="form-control my-1" value="{{reg2[i]}}">
@@ -92,8 +103,8 @@
             <div class="form-group">
                 <label>References</label>
                 <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add reference</button>
-                <input type="text" class="form-control" name="description" [(ngModel)]="model.relatedServices" #description="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"/>
-                <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+                <input type="text" class="form-control" name="references" [(ngModel)]="model.relatedServices" #references="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && references.invalid }"/>
+                <div *ngIf="f.submitted && references.invalid" class="invalid-feedback">
                 </div>
                 <div *ngFor="let reg2 of groupList; index as i" >
                     <input type="text" class="form-control my-1" value="{{reg2[i]}}">
@@ -102,8 +113,8 @@
             <div class="form-group">
                 <label>Service Functionalities</label>
                 <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addElement(1)">Add service functionality</button>
-                <input type="text" class="form-control" name="description" [(ngModel)]="model.relatedServices" #description="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"/>
-                <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+                <input type="text" class="form-control" name="functionalities" [(ngModel)]="model.relatedServices" #functionalities="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && functionalities.invalid }"/>
+                <div *ngIf="f.submitted && functionalities.invalid" class="invalid-feedback">
                 </div>
                 <div *ngFor="let reg2 of groupList; index as i" >
                     <input type="text" class="form-control my-1" value="{{reg2[i]}}">
@@ -124,22 +135,8 @@
                     <label for="rest">REST</label>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="soapEndpoint">SOAP Endpoint</label>
-                    <input type="text" class="form-control" name="soapEndpoint" [(ngModel)]="model.soapEndpoint" #soapEndpoint="ngModel" value="0.1"/>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="restEndpoint">REST Endpoint</label>
-                    <input type="text" class="form-control" name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel" value="0.1"/>
-                </div>
-            </div> 
+            <button class="btn btn-primary center-block" type="submit" (click)="copyToClipboard()">Copy WIKI Content</button> 
             <hr class="mb-4" />
-            <div class="row">
-                <div class="col-md-6">
-                    <button class="btn btn-secondary btn-lg center-block" type="submit" (click)="copyToClipboard()">Copy WIKI Content</button>
-                </div>
-            </div>
         </form>
     </div>
 </body>

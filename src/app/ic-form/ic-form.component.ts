@@ -18,11 +18,20 @@ export class IcFormComponent implements OnInit {
   message = this.model
 
   ngOnInit() {
+    this.model.serviceName = "TestServiceNameBAS"
+    this.model.icNumber = "TestDE.15"
+    this.model.serviceType = 'Business Activity Service'
+    this.model.status = 'In progress'
+    this.model.description = 'Do important things'
+    this.model.author = 'João Ribeiro'
+    this.model.eproseedName = 'jribeiro'
+    this.model.soapEndpoint = 'soapEndpointURL'
+    this.model.restEndpoint = 'restEndpointURL'
 
   // Introduction Section:
   //1.2. Service Scope
     this.model.scopeServices = [
-    'ReviewClaimDataEntryBAS',
+    this.model.serviceName.stringify,
     'ReviewClaimDataEntryDS',
     'ReviewClaimDataEntryDS',
     'ReviewClaimDataEntryDS'
@@ -65,10 +74,6 @@ export class IcFormComponent implements OnInit {
   //3.1. Service Overview
   this.model.devURL = 'http://esb-devwb-lb.daman.ae/'
   this.model.testURL = 'http://esb-testwb-lb.daman.ae/'
-  this.model.endpoints = [
-  {name: 'SOAP Endpoint', endpoint: 'daman-fsip-esb-osb-finance-bas-review-claim-data-entry/ProxyServices/ReviewClaimDataEntryBASSOAP'},
-  {name: 'REST Endpoint', endpoint: 'fsip/esb/api/daman-fsip-esb-osb-finance-app/review-claim-data-entry-bas/data-entry/v4/ReviewClaimDataEntryBASREST'}
-  ]
 
     //Operations
   this.model.operations = [
@@ -163,17 +168,6 @@ export class IcFormComponent implements OnInit {
    { id: '5', issue: 'ClosedIssue1',  resolution: 'Done', responsability: 'João Ribeiro', targetDate: '25/12/2018', impactDate: '25/12/2018'},
     ]
 
-  
-
-    
-
-  this.model.serviceName = "TestServiceName"
-  this.model.icNumber = "TestDE.15"
-  this.model.serviceType = 'Business Activity Service'
-  this.model.status = 'In progress'
-  this.model.description = 'Do important things'
-  this.model.author = 'João Ribeiro'
-  this.model.eproseedName = 'jribeiro'
     
   }
 
