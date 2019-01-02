@@ -6,14 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
 import { IcFormComponent } from './ic-form/ic-form.component';
-import { IcExtractComponent } from './ic-extract/ic-extract.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IntroComponent,
-    IcFormComponent,
-    IcExtractComponent
+    IcFormComponent
   ],
   imports: [
     BrowserModule,

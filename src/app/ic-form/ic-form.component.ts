@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {FormGroup, FormArray, FormBuilder} from '@angular/forms';
+import { parseString } from 'xml2js';
 
 @Component({
   selector: 'app-ic-form',
@@ -16,6 +17,7 @@ export class IcFormComponent implements OnInit {
 
   constructor() { }
   message = this.model
+  fileToUpload: File = null;
 
   ngOnInit() {
 
@@ -195,5 +197,27 @@ export class IcFormComponent implements OnInit {
        alert("text copied") 
   
   }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
+
+  extract() {
+    var reader = new FileReader();
+    var _this = this;
+    reader.onloadend = function() {
+      _this.show(String(reader.result));
+    };
+    reader.readAsText(this.fileToUpload);
+  }
+
+  show(data: String) {
+    var _this = this;
+    var _extracted = this.model;
+    parseString(data, function (err, result) {
+      _extracted.serviceName = result["con:soapui-project"]["con:interface"][0].$.name;
+    });
+  }
+
 
 }

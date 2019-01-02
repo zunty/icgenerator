@@ -10,7 +10,7 @@ export class IntroComponent implements OnInit {
   //date
   today: number = Date.now();
 
-  @Input() message: string;
+  @Input() message: any = {};
 
   constructor(){
 
