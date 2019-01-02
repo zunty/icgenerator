@@ -178,30 +178,59 @@ export class IcFormComponent implements OnInit {
     this.model.scopeServices.push(name);
   }
 
+  deleteScopeService(delElem){
+    var index = this.model.scopeServices.indexOf(delElem);
+    if (index > -1) {
+      this.model.scopeServices.splice(index, 1);
+    }
+  }
+
   addReferences(givenname,givenurl,givenversion) {
-    console.log(this.model);
     var newRef = [
       {docReference: givenname, url: givenurl, version: givenversion},
     ]
     this.model.references.push(newRef[0]);
   }
 
+  deleteReference(delElem){
+    var index = this.model.scopeServices.docReference.indexOf(delElem);
+    if (index > -1) {
+      this.model.references.splice(index, 1);
+    }
+  }
+
   addServiceFunctionalities(name) {
     this.model.serviceFunctionalities.push(name);
+  }
+
+  deleteServiceFunctionalities(delElem){
+    var index = this.model.serviceFunctionalities.indexOf(delElem);
+    if (index > -1) {
+      this.model.serviceFunctionalities.splice(index, 1);
+    }
   }
 
   onSubmit() {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model))
   }
 
-  copyToClipboard(){
-
-      var range = document.createRange();
+  copyContentToClipboard(){
+       var selection = window.getSelection();
+       selection.removeAllRanges;
+       var range = document.createRange();
        range.selectNode(document.getElementById('content'));
-       window.getSelection().addRange(range);
+       selection.addRange(range);
        document.execCommand("copy");
-       alert("text copied") 
-  
+  }
+
+  copyTitleToClipboard(){
+     
+     var selection = window.getSelection();
+     selection.removeAllRanges;
+     var range2 = document.createRange();
+     range2.selectNode(document.getElementById('title-text'));
+     selection.addRange(range2);
+     document.execCommand("copy");
   }
 
   handleFileInput(files: FileList) {

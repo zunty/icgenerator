@@ -1,22 +1,21 @@
 <div class="container">
-    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-    <!--<form method="POST" action="/submitForm">-->
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">SoapUI Project File</span>
-    </div>
-            <div class="custom-file">
-                <input type="file" name="xmlFile" class="custom-file-input" id="xmlFile" (change)="handleFileInput($event.target.files)"> />				
-                <label class="custom-file-label" for="xmlFile">Choose file</label>
-    </div>
-        </div>
-        <hr class="mb-4" />
-            <div class="row">
-            <div class="col-md-6 mb-3">
-                <button class="btn btn-secondary btn-lg btn-block" type="button" (click)="extract()">Extract</button>
+        <form #f="ngForm" novalidate>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">SoapUI Project File</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" name="xmlFile" class="custom-file-input" id="xmlFile" (change)="handleFileInput($event.target.files)"> />
+                    <label class="custom-file-label" for="xmlFile">Choose file</label>
+                </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-primary" type="button" (click)="extract()">Extract info from file</button>
+                </div>
+            </div>
+            <hr class="mb-4" />
+            <div class="row">
                 <div class="form-group" class="col-md-6 mb-3">
                     <label for="serviceName">Service Name</label>
                     <input type="text" class="form-control" name="serviceName" [(ngModel)]="model.serviceName" #serviceName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && serviceName.invalid }" required />
@@ -40,14 +39,14 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="icNumber">IC Number</label>
-                    <input type="text" class="form-control" name="icNumber" [(ngModel)]="model.icNumber" #icNumber="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && icNumber.invalid }" required />
+                    <input type="text" class="form-control" name="icNumber" [(ngModel)]="model.icNumber" #icNumber="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && icNumber.invalid }" required />
                     <div *ngIf="f.submitted && icNumber.invalid" class="invalid-feedback">
                         <div *ngIf="icNumber.errors.required">ICNumber is required. If none write 'none'</div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" name="status" [(ngModel)]="model.status" #status="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && status.invalid }" required />
+                    <input type="text" class="form-control" name="status" [(ngModel)]="model.status" #status="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && status.invalid }" required />
                     <div *ngIf="f.submitted && status.invalid" class="invalid-feedback">
                         <div *ngIf="status.errors.required">Status is required. If none write 'none'</div>
                     </div>
@@ -56,7 +55,7 @@
             <div class="form-group">
                 <div>
                     <label for="description">Service Description</label>
-                    <input type="text" class="form-control" name="description" [(ngModel)]="model.description" #description="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" required />
+                    <input type="text" class="form-control" name="description" [(ngModel)]="model.description" #description="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" required />
                     <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
                         <div *ngIf="description.errors.required">Service description is required</div>
                     </div>
@@ -65,68 +64,100 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="author">Author</label>
-                    <input type="text" class="form-control" name="author" [(ngModel)]="model.author" #author="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && author.invalid }" required />
+                    <input type="text" class="form-control" name="author" [(ngModel)]="model.author" #author="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && author.invalid }" required />
                     <div *ngIf="f.submitted && author.invalid" class="invalid-feedback">
                         <div *ngIf="author.errors.required">author is required</div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="eproseedName">Eproseed Name</label>
-                    <input type="text" class="form-control" name="eproseedName" [(ngModel)]="model.eproseedName" #eproseedName="ngModel" value="0.1" [ngClass]="{ 'is-invalid': f.submitted && eproseedName.invalid }" required />
+                    <input type="text" class="form-control" name="eproseedName" [(ngModel)]="model.eproseedName" #eproseedName="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && eproseedName.invalid }" required />
                     <div *ngIf="f.submitted && eproseedName.invalid" class="invalid-feedback">
                         <div *ngIf="eproseedName.errors.required">eproseedName is required. If none write 'none'</div>
                     </div>
                 </div>
-        </div>        
+            </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="soapEndpoint">SOAP Endpoint</label>
-                    <input type="text" class="form-control" name="soapEndpoint" [(ngModel)]="model.soapEndpoint" #soapEndpoint="ngModel"/>
+                    <input type="text" class="form-control" name="soapEndpoint" [(ngModel)]="model.soapEndpoint" #soapEndpoint="ngModel" />
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="restEndpoint">REST Endpoint</label>
-                    <input type="text" class="form-control" name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel"/>
+                    <input type="text" class="form-control" name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel" />
                 </div>
-            </div>        
+            </div>
             <div class="form-group">
                 <label>Services Related</label>
-                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addScopeService(servicesRelated.value)">Add related service</button>
-                <input type="text" class="form-control" name="servicesRelated" [(ngModel)]="model.servicesRelated" #servicesRelated="ngModel"/>
-                <ul><li *ngFor="let scopeServ of model.scopeServices">{{scopeServ}}</li></ul>
+                <button type="button" class="btn btn-info btn-sm m-2" (click)="addScopeService(servicesRelated.value)">Add related service</button>
+            </div>
+            <div>                
+                <input type="text" class="form-control" name="servicesRelated" [(ngModel)]="model.servicesRelated" #servicesRelated="ngModel" />
+            </div>
+            <div>
+                <ul>
+                    <li *ngFor="let scopeServ of model.scopeServices"><a><span class="badge">{{scopeServ}}</span></a><button class="btn btn-danger btn-sm" title="Delete" (click)="deleteScopeService(scopeServ)">X</button></li>
+                </ul>
             </div>
             <div class="form-group">
-                <label>References</label>
-                <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addReferences(referenceName.value,referenceUrl.value,referenceVersion.value)">Add reference</button>
+                <label>Service Functionalities</label>
+                <button type="button" class="btn btn-info btn-sm m-2" (click)="addServiceFunctionalities(functionalities.value)">Add new service functionality</button>                
+            </div>
+            <div>
+                <input type="text" class="form-control" name="functionalities" [(ngModel)]="model.functionalities" #functionalities="ngModel" />
+            </div>
+            <div>
+                <ul>
+                    <li *ngFor="let servFunc of model.serviceFunctionalities"><a><span class="badge">{{servFunc}}</span></a><button class="btn btn-danger btn-sm" title="Delete" (click)="deleteServiceFunctionalities(servFunc)">X</button></li>
+                </ul>
+            </div>
+            <div class="form-group">
+                    <label>References</label>
+                    <button type="button" class="btn btn-info btn-sm m-2" (click)="addReferences(referenceName.value,referenceUrl.value,referenceVersion.value)">Add reference</button>
             </div>
             <div class="row">
-                <div class="col-md-4 mb-3"><input type="text" class="form-control" name="referenceName" [(ngModel)]="model.referenceName" #referenceName="ngModel"/></div>
-                <div class="col-md-4 mb-3"><input type="text" class="form-control" name="referenceUrl" [(ngModel)]="model.referenceUrl" #referenceUrl="ngModel"/></div>
-                <div class="col-md-4 mb-3"><input type="text" class="form-control" name="referenceVersion" [(ngModel)]="model.referenceVersion" #referenceVersion="ngModel"/></div>
+                <div class="col-md-4 mb-3">
+                    <label>Reference Name</label>
+                    <input type="text" class="form-control" name="referenceName" [(ngModel)]="model.referenceName" #referenceName="ngModel" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Reference Link</label>
+                    <input type="text" class="form-control" name="referenceUrl" [(ngModel)]="model.referenceUrl" #referenceUrl="ngModel" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Version</label>
+                    <input type="text" class="form-control" name="referenceVersion" [(ngModel)]="model.referenceVersion" #referenceVersion="ngModel" />
+                </div>
             </div>
-            <div><ul><li *ngFor="let refer of model.references">{{refer.docReference}} - {{refer.url}} - {{refer.version}}</li></ul></div>                    
-            <div class="form-group">
-                        <label>Service Functionalities</label>
-                        <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addServiceFunctionalities(functionalities.value)">Add new service functionality</button>
-                        <input type="text" class="form-control" name="functionalities" [(ngModel)]="model.functionalities" #functionalities="ngModel"/>
-                        <ul><li *ngFor="let servFunc of model.serviceFunctionalities">{{servFunc}}</li></ul>
-            </div>    
+            <div>
+                <ul>
+                    <li *ngFor="let refer of model.references"><a><span class="badge">{{refer.docReference}} - {{refer.url}} - {{refer.version}}</span></a><button class="btn btn-danger btn-sm" title="Delete" (click)="deleteReference(refer.docReference,refer.url,refer.version)">X</button></li>
+                </ul>
+            </div>
             <hr class="mb-4" />
             <div class="row checkbox-row">
                 <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline" name="virtualization" [(ngModel)]="model.virtualization" #virtualization="ngModel" value="0.1">
+                    <input type="checkbox" class="checkbox-inline" name="virtualization" [(ngModel)]="model.virtualization" #virtualization="ngModel" >
                     <label for="virtualization">Virtualization</label>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline" name="soap" [(ngModel)]="model.soap" #soap="ngModel" value="0.1">
+                    <input type="checkbox" class="checkbox-inline" name="soap" [(ngModel)]="model.soap" #soap="ngModel" >
                     <label for="sopa">SOAP</label>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline"name="rest" [(ngModel)]="model.rest" #rest="ngModel" value="0.1">
+                    <input type="checkbox" class="checkbox-inline" name="rest" [(ngModel)]="model.rest" #rest="ngModel" >
                     <label for="rest">REST</label>
                 </div>
             </div>
-            <button class="btn btn-primary center-block" type="submit" (click)="copyToClipboard()">Copy WIKI Content</button> 
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <button class="btn btn-primary btn-block" (click)="copyTitleToClipboard()">Copy WIKI Title</button>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <button class="btn btn-primary btn-block" (click)="copyContentToClipboard()">Copy WIKI Content</button>
+                </div>
+            </div>
             <hr class="mb-4" />
         </form>
     </div>
-<app-intro [message]="model"></app-intro>
+    <app-intro [message]="model"></app-intro>
