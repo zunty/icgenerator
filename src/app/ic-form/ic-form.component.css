@@ -3,3 +3,12 @@
 .example-delete-tab-button {
   margin: 8px;
 }
+
+.input-group-prepend2 {
+  width : 20%; /*adjust as needed*/
+}
+
+.input-group-prepend2 button {
+  width: 100%;
+  overflow: hidden;
+}

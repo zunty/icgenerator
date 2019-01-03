@@ -87,12 +87,15 @@
                     <input type="text" class="form-control" name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel" />
                 </div>
             </div>
+            <hr class="mb-4" />
             <div class="form-group">
-                <label>Services Related</label>
-                <button type="button" class="btn btn-info btn-sm m-2" (click)="addScopeService(servicesRelated.value)">Add related service</button>
+                <label>Related Services</label>
             </div>
-            <div>                
+            <div class="input-group mb-3">                
                 <input type="text" class="form-control" name="servicesRelated" [(ngModel)]="model.servicesRelated" #servicesRelated="ngModel" />
+                <div class="input-group-append input-group-prepend2">
+                    <button type="button" class="btn btn-info btn-sm" (click)="addScopeService(servicesRelated.value)">Add related service</button>
+                </div>
             </div>
             <div>
                 <ul>
@@ -101,10 +104,12 @@
             </div>
             <div class="form-group">
                 <label>Service Functionalities</label>
-                <button type="button" class="btn btn-info btn-sm m-2" (click)="addServiceFunctionalities(functionalities.value)">Add new service functionality</button>                
             </div>
-            <div>
+            <div class="input-group mb-3">
                 <input type="text" class="form-control" name="functionalities" [(ngModel)]="model.functionalities" #functionalities="ngModel" />
+                <div class="input-group-append input-group-prepend2">
+                    <button type="button" class="btn btn-info btn-sm" (click)="addServiceFunctionalities(functionalities.value)">Add Service functionality</button>  
+                </div>
             </div>
             <div>
                 <ul>
@@ -113,42 +118,56 @@
             </div>
             <div class="form-group">
                     <label>References</label>
-                    <button type="button" class="btn btn-info btn-sm m-2" (click)="addReferences(referenceName.value,referenceUrl.value,referenceVersion.value)">Add reference</button>
+                    
             </div>
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label>Reference Name</label>
-                    <input type="text" class="form-control" name="referenceName" [(ngModel)]="model.referenceName" #referenceName="ngModel" />
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Reference Name" name="referenceName" [(ngModel)]="model.referenceName" #referenceName="ngModel" >
+                <input type="text" class="form-control" placeholder="Reference Link" name="referenceUrl" [(ngModel)]="model.referenceUrl" #referenceUrl="ngModel" >
+                <input type="text" class="form-control" placeholder="Version" name="referenceVersion" [(ngModel)]="model.referenceVersion" #referenceVersion="ngModel" >
+                <div class="input-group-append input-group-prepend2">
+                    <button type="button" class="btn btn-info btn-sm" (click)="addReferences(referenceName.value,referenceUrl.value,referenceVersion.value)">Add reference</button>  
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label>Reference Link</label>
-                    <input type="text" class="form-control" name="referenceUrl" [(ngModel)]="model.referenceUrl" #referenceUrl="ngModel" />
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label>Version</label>
-                    <input type="text" class="form-control" name="referenceVersion" [(ngModel)]="model.referenceVersion" #referenceVersion="ngModel" />
-                </div>
-            </div>
+            </div>  
             <div>
                 <ul>
-                    <li *ngFor="let refer of model.references"><a><span class="badge">{{refer.docReference}} - {{refer.url}} - {{refer.version}}</span></a><button class="btn btn-danger btn-sm" title="Delete" (click)="deleteReference(refer.docReference,refer.url,refer.version)">X</button></li>
+                    <li *ngFor="let refer of model.references"><a><span class="badge">{{refer.docReference}} - {{refer.url}} - {{refer.version}}</span></a><button class="btn btn-danger btn-sm" title="Delete" (click)="deleteReference(refer.docReference)">X</button></li>
+                </ul>
+            </div>
+            <div class="form-group">
+                    <label>Result Codes</label>
+                    
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Result Code" name="resultCode" [(ngModel)]="model.resultCode" #resultCode="ngModel" >
+                <input type="text" class="form-control" placeholder="Description" name="resultDesc" [(ngModel)]="model.resultDesc" #resultDesc="ngModel" >
+                <div class="input-group-append input-group-prepend2">
+                    <button type="button" class="btn btn-info btn-sm" (click)="addResultCode(resultCode.value,resultDesc.value)">Add result code</button>  
+                </div>
+            </div>  
+            <div>
+                <ul>
+                    <li *ngFor="let resCode of model.resultCodes"><a><span class="badge">{{resCode.code}} - {{resCode.description}}</span></a><button class="btn btn-danger btn-sm" title="Delete" (click)="deleteResultCode(resCode.code)">X</button></li>
                 </ul>
             </div>
             <hr class="mb-4" />
             <div class="row checkbox-row">
-                <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline" name="virtualization" [(ngModel)]="model.virtualization" #virtualization="ngModel" >
-                    <label for="virtualization">Virtualization</label>
+                <div class="col-md-4 mb-3 checkbox">                    
+                    <label style="font-size: 1.3em">
+                        <input type="checkbox" class="checkbox-inline styled" name="virtualization" [(ngModel)]="model.virtualization" #virtualization="ngModel" > Virtualization
+                    </label>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline" name="soap" [(ngModel)]="model.soap" #soap="ngModel" >
-                    <label for="sopa">SOAP</label>
+                    <label style="font-size: 1.3em">
+                        <input type="checkbox" class="checkbox-inline" name="soap" [(ngModel)]="model.soap" #soap="ngModel" > SOAP
+                    </label>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input type="checkbox" class="checkbox-inline" name="rest" [(ngModel)]="model.rest" #rest="ngModel" >
-                    <label for="rest">REST</label>
+                    <label style="font-size: 1.3em">
+                            <input type="checkbox" class="checkbox-inline" name="rest" [(ngModel)]="model.rest" #rest="ngModel" > REST
+                    </label>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <button class="btn btn-primary btn-block" (click)="copyTitleToClipboard()">Copy WIKI Title</button>
@@ -160,4 +179,5 @@
             <hr class="mb-4" />
         </form>
     </div>
-    <app-intro [message]="model"></app-intro>
+    <div class="container"><app-intro [message]="model" ></app-intro></div>
+    

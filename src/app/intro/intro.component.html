@@ -223,6 +223,20 @@
                             <p>Initial Version</p>
                         </td>
                     </tr>
+                    <tr role="row">
+                        <td class="confluenceTd">
+                            <p>&nbsp;</p>
+                        </td>
+                        <td class="confluenceTd">
+                            <p>&nbsp;</p>
+                        </td>
+                        <td class="confluenceTd">
+                            <p>&nbsp;</p>
+                        </td>
+                        <td class="confluenceTd">
+                            <p>&nbsp;</p>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -800,13 +814,13 @@
                         </tr>
                     </thead>
                     <tbody aria-live="polite" aria-relevant="all">
-                        <tr *ngFor="let openiss of message.openIssues" role="row">
-                            <td class="confluenceTd">{{openiss.id}}</td>
-                            <td class="confluenceTd">{{openiss.issue}}</td>
-                            <td class="confluenceTd">{{openiss.resolution}}</td>
-                            <td class="confluenceTd">{{openiss.responsability}}</td>
-                            <td class="confluenceTd">{{openiss.targetDate}}</td>
-                            <td class="confluenceTd">{{openiss.impactDate}}</td>
+                        <tr *ngFor="let openiss of [0,1]" role="row">
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
                         </tr>
                     </tbody>
                 </table>
@@ -892,13 +906,13 @@
                         </tr>
                     </thead>
                     <tbody aria-live="polite" aria-relevant="all">
-                        <tr *ngFor="let closediss of message.closedIssues" role="row">
-                            <td class="confluenceTd">{{closediss.id}}</td>
-                            <td class="confluenceTd">{{closediss.issue}}</td>
-                            <td class="confluenceTd">{{closediss.resolution}}</td>
-                            <td class="confluenceTd">{{closediss.responsability}}</td>
-                            <td class="confluenceTd">{{closediss.targetDate}}</td>
-                            <td class="confluenceTd">{{closediss.impactDate}}</td>
+                        <tr *ngFor="let closediss of [0,1]" role="row">
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
+                            <td class="confluenceTd">&nbsp;</td>
                         </tr>
                     </tbody>
                 </table>

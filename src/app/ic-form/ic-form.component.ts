@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ɵConsole} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {FormGroup, FormArray, FormBuilder} from '@angular/forms';
 import { parseString } from 'xml2js';
@@ -148,7 +148,6 @@ export class IcFormComponent implements OnInit {
       }
       ]
 
-
   // 4. Artifacts Section:
   // Result Codes
   this.model.resultCodes = [
@@ -157,6 +156,7 @@ export class IcFormComponent implements OnInit {
   	{code: 'FIN-9003203', description: 'InvalidInput'}
   ]
 
+/*
   // 5. Open and Closed Issues:
   // Open Issues
   this.model.openIssues = [
@@ -170,7 +170,7 @@ export class IcFormComponent implements OnInit {
    { id: '4', issue: 'ClosedIssue1',  resolution: 'Done', responsability: 'João Ribeiro', targetDate: '25/12/2018', impactDate: '25/12/2018'},
    { id: '5', issue: 'ClosedIssue1',  resolution: 'Done', responsability: 'João Ribeiro', targetDate: '25/12/2018', impactDate: '25/12/2018'},
     ]
-
+*/
     
   }
 
@@ -185,20 +185,6 @@ export class IcFormComponent implements OnInit {
     }
   }
 
-  addReferences(givenname,givenurl,givenversion) {
-    var newRef = [
-      {docReference: givenname, url: givenurl, version: givenversion},
-    ]
-    this.model.references.push(newRef[0]);
-  }
-
-  deleteReference(delElem){
-    var index = this.model.scopeServices.docReference.indexOf(delElem);
-    if (index > -1) {
-      this.model.references.splice(index, 1);
-    }
-  }
-
   addServiceFunctionalities(name) {
     this.model.serviceFunctionalities.push(name);
   }
@@ -207,6 +193,36 @@ export class IcFormComponent implements OnInit {
     var index = this.model.serviceFunctionalities.indexOf(delElem);
     if (index > -1) {
       this.model.serviceFunctionalities.splice(index, 1);
+    }
+  }
+
+  addReferences(givenname,givenurl,givenversion) {
+    var newRef = [
+      {docReference: givenname, url: givenurl, version: givenversion},
+    ]
+    this.model.references.push(newRef[0]);
+  }
+
+  deleteReference(delElem: any){
+    var index = this.model.references.map(function(e){return e.docReference}).indexOf(delElem);
+    console.log
+    if (index > -1) {
+      this.model.references.splice(index, 1);
+    }
+  }
+
+  addResultCode(givencode,givendescription) {
+    var newCode = [
+      {code: givencode, description: givendescription},
+    ]
+    this.model.resultCodes.push(newCode[0]);
+  }
+
+  deleteResultCode(delElem: any){
+    var index = this.model.resultCodes.map(function(e){return e.code}).indexOf(delElem);
+    console.log
+    if (index > -1) {
+      this.model.resultCodes.splice(index, 1);
     }
   }
 
@@ -219,6 +235,7 @@ export class IcFormComponent implements OnInit {
        selection.removeAllRanges;
        var range = document.createRange();
        range.selectNode(document.getElementById('content'));
+       console.log(range);
        selection.addRange(range);
        document.execCommand("copy");
   }
@@ -249,8 +266,17 @@ export class IcFormComponent implements OnInit {
   show(data: String) {
     var _this = this;
     var _extracted = this.model;
+    var nOperations = 2;
     parseString(data, function (err, result) {
       _extracted.serviceName = result["con:soapui-project"]["con:interface"][0].$.name;
+      _extracted.icNumber = result["con:soapui-project"].$.name;
+      console.log(result["con:soapui-project"]["con:interface"][0]["con:operation"][0].$.name)
+      
+      //Operations info extraction
+      for(var i=0;i<nOperations;i++){
+        _extracted.operations[i].name = result["con:soapui-project"]["con:interface"][0]["con:operation"][i].$.name
+      }
+
     });
   }
 
