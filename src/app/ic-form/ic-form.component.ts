@@ -79,74 +79,7 @@ export class IcFormComponent implements OnInit {
   this.model.testURL = 'http://esb-testwb-lb.daman.ae/'
 
     //Operations
-  this.model.operations = [
-      {name: 'Operation example 1', 
-       type: 'SOAP',
-       reqFields: 
-         [
-          {mandatory:'[ 1 ]', name: 'RespHeader', type: 'XML Element', description: 'desc1'},
-          {mandatory:'[ 0..1 ]', name: 'RespBody', type: 'XML Element2', description: 'desc2'},
-          {mandatory:'[ 0..∞]', name: 'Authorization', type: 'XML Element3', description: 'desc3'}
-         ],
-        respFields: 
-         [
-          {mandatory:'[ 1 ]', name: 'RespHeader', type: 'XML Element', description: 'desc1'},
-          {mandatory:'[ 0..1 ]', name: 'RespBody', type: 'XML Element2', description: 'desc2'},
-          {mandatory:'[ 0..∞]', name: 'Authorization', type: 'XML Element3', description: 'desc3'}
-         ],
-           requestText : [
-        {
-          "ReqHeader" : {},
-          "ReqBody" : {
-            "Claim" : {
-              "ClaimID" : "33172",
-        }}
-        }
-        ],
-        responseText : [
-        {
-          "ReqHeader" : {},
-          "ReqBody" : {
-            "Claim" : {
-              "ClaimID" : "33172",
-        }}
-        }
-        ]
-      },
-      {name: 'Operation example 2', 
-       type: 'REST',
-       reqFields: 
-         [
-          {mandatory:'[ 1 ]', name: 'RespHeader', type: 'XML Element', description: 'desc1'},
-          {mandatory:'[ 0..1 ]', name: 'RespBody', type: 'XML Element2', description: 'desc2'},
-          {mandatory:'[ 0..∞]', name: 'Authorization', type: 'XML Element3', description: 'desc3'}
-         ],
-        respFields: 
-         [
-          {mandatory:'[ 1 ]', name: 'RespHeader', type: 'XML Element', description: 'desc1'},
-          {mandatory:'[ 0..1 ]', name: 'RespBody', type: 'XML Element2', description: 'desc2'},
-          {mandatory:'[ 0..∞]', name: 'Authorization', type: 'XML Element3', description: 'desc3'}
-         ],
-           requestText : [
-        {
-          "ReqHeader" : {},
-          "ReqBody" : {
-            "Claim" : {
-              "ClaimID" : "33172",
-        }}
-        }
-        ],
-        responseText : [
-        {
-          "ReqHeader" : {},
-          "ReqBody" : {
-            "Claim" : {
-              "ClaimID" : "33172",
-        }}
-        }
-        ]
-      }
-      ]
+  this.model.operations = [];
 
   // 4. Artifacts Section:
   // Result Codes
@@ -172,6 +105,14 @@ export class IcFormComponent implements OnInit {
     ]
 */
     
+  }
+
+  serviceType = {
+    DS: "Data Service",
+    CS: "Connectivity Service",
+    BAS: "Business Activity Service",
+    BPS: "Business Process Service",
+    DECS: "Decision Service"
   }
 
   addScopeService(name) {
@@ -265,16 +206,43 @@ export class IcFormComponent implements OnInit {
 
   show(data: String) {
     var _this = this;
-    var _extracted = this.model;
-    var nOperations = 2;
+    var _model = this.model;
+    var nOperations = 4;
+    
+    _model.operations= []; //Clean Variable
+
     parseString(data, function (err, result) {
-      _extracted.serviceName = result["con:soapui-project"]["con:interface"][0].$.name;
-      _extracted.icNumber = result["con:soapui-project"].$.name;
-      console.log(result["con:soapui-project"]["con:interface"][0]["con:operation"][0].$.name)
+      var serviceName = result["con:soapui-project"]["con:interface"][0].$.name;
+      
+      if (serviceName) {
+        serviceName =  serviceName.replace("Service", "");
+        serviceName =  serviceName.replace("Binding", "");  
+        _model.serviceName = serviceName;
+        for (let type in _this.serviceType) {
+            let endWith = type + "$";
+            if (serviceName.search(endWith) != -1) {
+              _model.serviceType = _this.serviceType[type];
+              break;
+            }
+        }
+      }
+      
+      _model.icNumber = result["con:soapui-project"].$.name;
+
       
       //Operations info extraction
       for(var i=0;i<nOperations;i++){
-        _extracted.operations[i].name = result["con:soapui-project"]["con:interface"][0]["con:operation"][i].$.name
+
+        var operationSample = {name:'',type:'',reqFields:[{mandatory:'', name: '', type: '', description: ''}],respFields: [{mandatory:'', name: '', type: '', description: ''}],requestText : [],responseText : []}
+        
+        operationSample.name = result["con:soapui-project"]["con:interface"][0]["con:operation"][i].$.name
+        operationSample.requestText = result["con:soapui-project"]["con:interface"][0]["con:operation"][i]["con:call"][0]["con:request"][0]
+        
+        _model.operations.push(operationSample);
+
+        console.log(operationSample)
+        console.log(_model)
+        
       }
 
     });

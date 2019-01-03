@@ -672,7 +672,7 @@
                 <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleRequest"><span class="nh-number">3.{{i+2}}.3. </span><span style="color: rgb(0,0,0);">Sample {{operation.type}} Request</span></h3>
                 <div class="preformatted panel conf-macro output-block" data-hasbody="true" data-macro-name="noformat" style="border-width: 1px;">
                     <div class="preformattedContent panelContent">
-                        <pre>{{message.soapEndpoint | json}}</pre>
+                        <pre>{{operation.requestText | json}}</pre>
                     </div>
                 </div>
                 <p>
