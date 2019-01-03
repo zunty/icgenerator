@@ -174,6 +174,14 @@ export class IcFormComponent implements OnInit {
     
   }
 
+  serviceType = {
+    DS: "Data Service",
+    CS: "Connectivity Service",
+    BAS: "Business Activity Service",
+    BPS: "Business Process Service",
+    DECS: "Decision Service"
+  }
+
   addScopeService(name) {
     this.model.scopeServices.push(name);
   }
@@ -248,9 +256,23 @@ export class IcFormComponent implements OnInit {
 
   show(data: String) {
     var _this = this;
-    var _extracted = this.model;
+    var _model = this.model;
     parseString(data, function (err, result) {
-      _extracted.serviceName = result["con:soapui-project"]["con:interface"][0].$.name;
+      var serviceName = result["con:soapui-project"]["con:interface"][0].$.name;
+      if (serviceName) {
+        serviceName =  serviceName.replace("Service", "");
+        serviceName =  serviceName.replace("Binding", "");  
+        _model.serviceName = serviceName;
+        for (let type in _this.serviceType) {
+            let endWith = type + "$";
+            if (serviceName.search(endWith) != -1) {
+              _model.serviceType = _this.serviceType[type];
+              break;
+            }
+        }
+      }
+      
+      
     });
   }
 
