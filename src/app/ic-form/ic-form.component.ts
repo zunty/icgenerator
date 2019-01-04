@@ -175,6 +175,8 @@ export class IcFormComponent implements OnInit {
        var selection = window.getSelection();
        selection.removeAllRanges;
        var range = document.createRange();
+       /*var element = document.getElementById('content');
+       var elemHTML = element.innerHTML.replace(new RegExp('http://localhost', 'g'),'') */
        range.selectNode(document.getElementById('content'));
        console.log(range);
        selection.addRange(range);
@@ -228,16 +230,118 @@ export class IcFormComponent implements OnInit {
       }
       
       _model.icNumber = result["con:soapui-project"].$.name;
-
+      console.log("dssfds" + result["con:soapui-project"]["con:interface"][0]["con:settings"][0]["con:part"])
       
       //Operations info extraction
       for(var i=0;i<nOperations;i++){
 
-        var operationSample = {name:'',type:'',reqFields:[{mandatory:'', name: '', type: '', description: ''}],respFields: [{mandatory:'', name: '', type: '', description: ''}],requestText : [],responseText : []}
-        
+        var operationSample = {name:'',type:'',reqFields:[],respFields: [],requestText : [],responseText : []}
+
         operationSample.name = result["con:soapui-project"]["con:interface"][0]["con:operation"][i].$.name
         operationSample.requestText = result["con:soapui-project"]["con:interface"][0]["con:operation"][i]["con:call"][0]["con:request"][0]
+
+        var nElem = 0;
+
+        parseString(operationSample.requestText, function (err, reqResult) {
+          for (let x in reqResult["soapenv:Envelope"]) {  
+            if (x === '_') { continue; }          
+            //console.log("x: " + x + ": "+ reqResult["soapenv:Envelope"][x] + " with length: " + reqResult["soapenv:Envelope"][x].length);
+
+            for (var xi=0; xi<reqResult["soapenv:Envelope"][x].length; xi++) {            
+              //console.log("   xi: " + xi);              
+                for (let y in reqResult["soapenv:Envelope"][x][xi]) {
+                  if (y === '_') { continue; }   
+                  //console.log("      y:" + y + ": "+ reqResult["soapenv:Envelope"][x][xi][y] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y].length);
+
+                    for (var yi=0; yi<reqResult["soapenv:Envelope"][x][xi][y].length; yi++) {            
+                      //console.log("         yi: " + yi);              
+                        for (let z in reqResult["soapenv:Envelope"][x][xi][y][yi]) {
+                          if (z === '_' || z === '0') { continue; }
+
+                             
+                          //console.log("            z:" + z + ": "+ reqResult["soapenv:Envelope"][x][xi][y][yi][z] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y][yi][z].length);
+                          var respElemZ = {mandatory:'', name: '', type: '', description: '', nSpaces:[]}
+                          respElemZ.name = z.substring(z.indexOf(":") + 1)
+                          respElemZ.type = "XML Element"
+                          respElemZ.mandatory = "[1]"
+                          respElemZ.description = "Parent element"
+                          operationSample.reqFields.push(respElemZ);
+                          nElem++;
+                          if (z.includes('CBMHeader')) continue;
+
+                          for (var zi=0; zi<reqResult["soapenv:Envelope"][x][xi][y][yi][z].length; zi++) {            
+                            //console.log("         zi: " + zi);
+                            var kbool=false;               
+                              for (let k in reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi]) {
+                                if (k === '_' || k === '0') { continue; }
+                                if (k === '0') {
+                                  kbool=true; continue;
+                                }    
+                                //console.log("            k:" + k + ": "+ reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k].length);
+                                var respElemK = {mandatory:'', name: '', type: '', description: '', nSpaces:['']}
+                                respElemK.name = k.substring(k.indexOf(":") + 1)
+                                respElemK.type = "XML Element"
+                                if(kbool)respElemK.mandatory = "[0,1]"
+                                else respElemK.mandatory = "[1]"
+                                respElemK.description = ""
+                                operationSample.reqFields.push(respElemK);
+                                nElem++;
+                                kbool=false
+
+                                for (var ki=0; ki<reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k].length; ki++) {            
+                                  //console.log("         ki: " + ki);
+                                  var wbool=false;                
+                                    for (let w in reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki]) {
+                                      if (w === '_' || w === '0') { continue; }
+                                      if (w === '0') {
+                                        wbool=true; continue;
+                                      }  
+                                      //console.log("            w:" + w + ": "+ reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w].length);
+                                      var respElemW = {mandatory:'', name: '', type: '', description: '', nSpaces:['','']}
+                                      respElemW.name = w.substring(w.indexOf(":") + 1)
+                                      respElemW.type = "XML Element"
+                                      if(wbool)respElemW.mandatory = "[0,1]"
+                                      else respElemW.mandatory = "[1]"
+                                      respElemW.description = ""
+                                      operationSample.reqFields.push(respElemW);
+                                      nElem++;
+                                      wbool=false;
+
+                                      for (var wi=0; wi<reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w].length; wi++) {            
+                                        //console.log("         wi: " + wi);
+                                        var lbool=false;              
+                                          for (let l in reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w][wi]) {
+                                            if (l === '_') { continue;} 
+                                            if (l === '0') {
+                                              lbool=true; continue;
+                                            }
+                                            if (l.match("list")) console.log("Value: " + l + " contains a list")
+                                            //console.log("            l:" + l + ": "+ reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w][wi][l] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w][wi][l].length);
+                                            var respElemL = {mandatory:'', name: '', type: '', description: '', nSpaces:['','','']}
+                                            respElemL.name = l.substring(l.indexOf(":") + 1)
+                                            respElemL.type = "XML Element"
+                                            if(lbool)respElemL.mandatory = "[0,1]"
+                                            else respElemL.mandatory = "[1]"
+                                            respElemL.description = ""
+                                            operationSample.reqFields.push(respElemL);
+                                            nElem++;
+                                            lbool=false;
+                                        }
+                                      }
+                                  }
+                                }
+                            }
+                          }
+                      }
+                    }
+              }
+            }
+        }
+        })
         
+
+        operationSample.responseText = ["<soapenv:Envelope></soapenv:Envelope>"]
+
         _model.operations.push(operationSample);
 
         console.log(operationSample)
