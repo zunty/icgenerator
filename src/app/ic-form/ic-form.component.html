@@ -1,5 +1,8 @@
 <div class="container">
         <form #f="ngForm" novalidate>
+            <div *ngIf="!isNotFirefox" class="alert alert-warning" role="alert">
+                You should use Mozilla Firefox instead. Copy content feature is not yet supported by other browsers
+            </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">SoapUI Project File</span>
@@ -20,9 +23,8 @@
                     <label for="serviceName">Service Name</label>
                     <input type="text" class="form-control" name="serviceName" [(ngModel)]="model.serviceName" #serviceName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && serviceName.invalid }" required />
                     <div *ngIf="f.submitted && serviceName.invalid" class="invalid-feedback">
-                        <div *ngIf="serviceName.errors.required">Service Name is required</div>
+                        <div *ngIf="serviceName.errors.required">Service Name should be filled</div>
                     </div>
-                    <div class="invalid-feedback">Example invalid custom select feedback</div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="serviceType">Service Type</label>
@@ -39,52 +41,52 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="icNumber">IC Number</label>
-                    <input type="text" class="form-control" name="icNumber" [(ngModel)]="model.icNumber" #icNumber="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && icNumber.invalid }" required />
+                    <input type="text" class="form-control" placeholder="Usually DExx.xx.xx" name="icNumber" [(ngModel)]="model.icNumber" #icNumber="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && icNumber.invalid }" required />
                     <div *ngIf="f.submitted && icNumber.invalid" class="invalid-feedback">
-                        <div *ngIf="icNumber.errors.required">ICNumber is required. If none write 'none'</div>
+                        <div *ngIf="icNumber.errors.required">ICNumber should be filled. If none write 'none'</div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" name="status" [(ngModel)]="model.status" #status="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && status.invalid }" required />
+                    <input type="text" class="form-control" placeholder="Done, In progress..." name="status" [(ngModel)]="model.status" #status="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && status.invalid }" required />
                     <div *ngIf="f.submitted && status.invalid" class="invalid-feedback">
-                        <div *ngIf="status.errors.required">Status is required. If none write 'none'</div>
+                        <div *ngIf="status.errors.required">Status should be filled</div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div>
                     <label for="description">Service Description</label>
-                    <input type="text" class="form-control" name="description" [(ngModel)]="model.description" #description="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" required />
+                    <input type="text" class="form-control" placeholder="The continuation of 'the purpose of this Interface Contract is to describe the interface for service used to ' ..." name="description" [(ngModel)]="model.description" #description="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" required />
                     <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
-                        <div *ngIf="description.errors.required">Service description is required</div>
+                        <div *ngIf="description.errors.required">Service description should be filled</div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="author">Author</label>
-                    <input type="text" class="form-control" name="author" [(ngModel)]="model.author" #author="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && author.invalid }" required />
+                    <input type="text" class="form-control" placeholder="First and last name. Ex: John Silva" name="author" [(ngModel)]="model.author" #author="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && author.invalid }" required />
                     <div *ngIf="f.submitted && author.invalid" class="invalid-feedback">
-                        <div *ngIf="author.errors.required">author is required</div>
+                        <div *ngIf="author.errors.required">Author should be filled</div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="eproseedName">Eproseed Name</label>
-                    <input type="text" class="form-control" name="eproseedName" [(ngModel)]="model.eproseedName" #eproseedName="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && eproseedName.invalid }" required />
-                    <div *ngIf="f.submitted && eproseedName.invalid" class="invalid-feedback">
-                        <div *ngIf="eproseedName.errors.required">eproseedName is required. If none write 'none'</div>
+                        <label for="eproseedName">Eproseed Name</label>
+                        <input type="text" class="form-control" placeholder="eproseed name. Ex: jsilva" name="eproseedName" [(ngModel)]="model.eproseedName" #eproseedName="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && eproseedName.invalid }" required />
+                        <div *ngIf="f.submitted && eproseedName.invalid" class="invalid-feedback">
+                            <div *ngIf="eproseedName.errors.required">Eproseed Name should be filled</div>
+                        </div>
                     </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="soapEndpoint">SOAP Endpoint</label>
-                    <input type="text" class="form-control" name="soapEndpoint" [(ngModel)]="model.soapEndpoint" #soapEndpoint="ngModel" />
+                    <input type="text" class="form-control" placeholder="Endpoint without 'host:port/' and '.wsdl'" name="soapEndpoint" [(ngModel)]="model.soapEndpoint" #soapEndpoint="ngModel" />
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="restEndpoint">REST Endpoint</label>
-                    <input type="text" class="form-control" name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel" />
+                    <input type="text" class="form-control" placeholder="Endpoint without 'host:port/' and '.wsdl'"name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel" />
                 </div>
             </div>
             <hr class="mb-4" />
@@ -106,7 +108,7 @@
                 <label>Service Functionalities</label>
             </div>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="functionalities" [(ngModel)]="model.functionalities" #functionalities="ngModel" />
+                <input type="text" class="form-control" placeholder="Ex: Get an Authorization" name="functionalities" [(ngModel)]="model.functionalities" #functionalities="ngModel" />
                 <div class="input-group-append input-group-prepend2">
                     <button type="button" class="btn btn-info btn-sm" (click)="addServiceFunctionalities(functionalities.value)">Add Service functionality</button>  
                 </div>

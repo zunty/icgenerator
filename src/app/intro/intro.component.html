@@ -655,13 +655,14 @@
                                 </th>
                                 <th class="confluenceTh">Description</th>
                             </tr>
-                            <tr *ngFor="let field of operation.respFields">
+                            <!--<tr *ngFor="let field of operation.respFields">-->
+                            <tr *ngFor="let reg2 of [0,1]">
                                 <td colspan="6" class="confluenceTd">
-                                    <p align="LEFT">{{field.mandatory}}</p>
+                                    <p align="LEFT">&nbsp;</p>
                                 </td>
-                                <td class="confluenceTd">{{field.name}}</td>
-                                <td class="confluenceTd">{{field.type}}</td>
-                                <td class="confluenceTd">{{field.description}}</td>
+                                <td class="confluenceTd">&nbsp;</td>
+                                <td class="confluenceTd">&nbsp;</td>
+                                <td class="confluenceTd">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
@@ -670,20 +671,28 @@
                 <p><span style="color: rgb(0,0,0);"><u><strong><br></strong></u></span></p>
                 <br>
                 <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleRequest"><span class="nh-number">3.{{i+2}}.3. </span><span style="color: rgb(0,0,0);">Sample {{operation.type}} Request</span></h3>
-                <div class="preformatted panel conf-macro output-block" data-hasbody="true" data-macro-name="noformat" style="border-width: 1px;">
-                    <div class="preformattedContent panelContent">
-                        <pre>{{operation.requestText | json}}</pre>
-                    </div>
-                </div>
+                <table class="wysiwyg-macro" data-macro-name="code" data-macro-schema-version="1" style="background-image: url(/plugins/servlet/confluence/placeholder/macro-heading?definition=e2NvZGV9&amp;locale=pt_BR&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT">
+                    <tbody>
+                       <tr>
+                          <td class="wysiwyg-macro-body">
+                             <pre>{{operation.requestText | json}}</pre>
+                          </td>
+                       </tr>
+                    </tbody>
+                </table>
                 <p>
                     <br>
                 </p>
                 <h3 id="{{message.icNumber}}-{{message.serviceName}}-{{operation.name}}-SampleResponse"><span class="nh-number">3.{{i+2}}.4. </span><span style="color: rgb(0,0,0);">Sample {{operation.type}} Response</span></h3>
-                <div class="preformatted panel conf-macro output-block" data-hasbody="true" data-macro-name="noformat" style="border-width: 1px;">
-                    <div class="preformattedContent panelContent">
-                        <pre>{{operation.responseText | json}}</pre>
-                    </div>
-                </div>
+                <table class="wysiwyg-macro" data-macro-name="code" data-macro-schema-version="1" style="background-image: url(/plugins/servlet/confluence/placeholder/macro-heading?definition=e2NvZGV9&amp;locale=pt_BR&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT">
+                    <tbody>
+                       <tr>
+                          <td class="wysiwyg-macro-body">
+                             <pre>{{operation.responseText | json}}</pre>
+                          </td>
+                       </tr>
+                    </tbody>
+                </table>
                 <p>
                     <br>
                 </p>
