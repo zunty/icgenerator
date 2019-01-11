@@ -1,7 +1,17 @@
-import { Component, OnInit, Input, ɵConsole } from "@angular/core";
+import { Component, OnInit, Input, ɵConsole, Pipe, PipeTransform  } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { FormGroup, FormArray, FormBuilder } from "@angular/forms";
 import { parseString } from "xml2js";
+import * as vkbeautify from 'vkbeautify';
+
+@Pipe({
+  name: 'xml'
+})
+export class XmlPipe implements PipeTransform {
+  transform(value: string): string {
+      return vkbeautify.xml(value);
+  }
+}
 
 @Component({
   selector: "app-ic-form",
@@ -13,7 +23,6 @@ export class IcFormComponent implements OnInit {
   model: any = {};
   groupList: any = [];
   isNotFirefox = true;
-  boolTest = true;
 
   constructor() {}
   message = this.model;
@@ -21,7 +30,6 @@ export class IcFormComponent implements OnInit {
 
   ngOnInit() {
     if (navigator.userAgent.indexOf("Chrome") != -1) this.isNotFirefox = false;
-    console.log(this.isNotFirefox);
 
     //this.model.serviceName = "TestServiceNameBAS"
     //this.model.icNumber = "TestDE.15"
@@ -30,7 +38,7 @@ export class IcFormComponent implements OnInit {
     //this.model.description = 'Does important things'
     //this.model.author = 'João Ribeiro'
     //this.model.eproseedName = 'jribeiro'
-    //this.model.soap = 'true'
+    this.model.soap = 'true'
     //this.model.soapEndpoint = 'soapEndpointURL'
     //this.model.rest = 'true'
     //this.model.restEndpoint = 'restEndpointURL'
@@ -60,7 +68,7 @@ export class IcFormComponent implements OnInit {
     //Initialize some variables
     //1.4.References
     this.model.references = [
-      //{docReference: 'Technical Objects', url: 'https://wiki.eproseed.com/display/DMFC/02+-+Technical+Objects', version: '0.1'},
+      {docReference: 'Technical Objects', url: 'https://wiki.eproseed.com/display/DMFC/02+-+Technical+Objects', version: '0.1'},
       //{docReference: 'Authorization', url: 'https://wiki.eproseed.com/display/DMFC/AuthorizationType', version: '0.4'},
     ];
 
@@ -150,7 +158,6 @@ export class IcFormComponent implements OnInit {
         return e.docReference;
       })
       .indexOf(delElem);
-    console.log;
     if (index > -1) {
       this.model.references.splice(index, 1);
     }
@@ -167,10 +174,21 @@ export class IcFormComponent implements OnInit {
         return e.code;
       })
       .indexOf(delElem);
-    console.log;
     if (index > -1) {
       this.model.resultCodes.splice(index, 1);
     }
+  }
+
+  addOperation(givenName){
+    var operationSample = {
+      name: givenName,
+      type: "",
+      reqFields: [],
+      respFields: [],
+      requestText: [],
+      responseText: []
+    };
+    this.model.operations.push(operationSample);
   }
 
   onSubmit() {
@@ -181,13 +199,8 @@ export class IcFormComponent implements OnInit {
     var selection = window.getSelection();
     selection.removeAllRanges;
     var range = document.createRange();
-    /*var element = document.getElementById('content');
-       var elemHTML = element.innerHTML.replace(new RegExp('http://localhost', 'g'),'') */
-    var element = document.getElementById("content");
-    element.innerHTML.replace(new RegExp('http://localhost', 'g'),'');
     range.selectNode(document.getElementById("content"));
     selection.addRange(range);
-    console.log();
     document.execCommand("copy");
   }
 
@@ -251,10 +264,11 @@ export class IcFormComponent implements OnInit {
           result["con:soapui-project"]["con:interface"][0]["con:operation"][
             i
           ].$.name;
+
         operationSample.requestText =
           result["con:soapui-project"]["con:interface"][0]["con:operation"][i][
             "con:call"
-          ][0]["con:request"][0].replace("/\r/g", "");
+          ][0]["con:request"][0].replace(/\\r|\n/g, "");
           
 
         var nElem = 0;
@@ -264,32 +278,29 @@ export class IcFormComponent implements OnInit {
             if (x === "_") {
               continue;
             }
-            //console.log("x: " + x + ": "+ reqResult["soapenv:Envelope"][x] + " with length: " + reqResult["soapenv:Envelope"][x].length);
 
             for (
               var xi = 0;
               xi < reqResult["soapenv:Envelope"][x].length;
               xi++
             ) {
-              //console.log("   xi: " + xi);
+              
               for (let y in reqResult["soapenv:Envelope"][x][xi]) {
                 if (y === "_") {
                   continue;
                 }
-                //console.log("      y:" + y + ": "+ reqResult["soapenv:Envelope"][x][xi][y] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y].length);
 
                 for (
                   var yi = 0;
                   yi < reqResult["soapenv:Envelope"][x][xi][y].length;
                   yi++
                 ) {
-                  //console.log("         yi: " + yi);
+                  
                   for (let z in reqResult["soapenv:Envelope"][x][xi][y][yi]) {
                     if (z === "_" || z === "0") {
                       continue;
                     }
 
-                    //console.log("            z:" + z + ": "+ reqResult["soapenv:Envelope"][x][xi][y][yi][z] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y][yi][z].length);
                     var respElemZ = {
                       mandatory: "",
                       name: "",
@@ -297,13 +308,15 @@ export class IcFormComponent implements OnInit {
                       description: "",
                       nSpaces: []
                     };
+
                     respElemZ.name = z.substring(z.indexOf(":") + 1);
                     respElemZ.type = "XML Element";
                     respElemZ.mandatory = "[1]";
                     respElemZ.description = "Parent element";
                     operationSample.reqFields.push(respElemZ);
                     nElem++;
-                    if (z.includes("CBMHeader")) continue;
+
+                    if (z.includes("CBMHeader")){respElemZ.description="HeaderType in Technical Objects"; continue;}
 
                     for (
                       var zi = 0;
@@ -311,34 +324,30 @@ export class IcFormComponent implements OnInit {
                       reqResult["soapenv:Envelope"][x][xi][y][yi][z].length;
                       zi++
                     ) {
-                      //console.log("         zi: " + zi);
-                      var kbool = false;
+                                           
                       for (let k in reqResult["soapenv:Envelope"][x][xi][y][yi][
                         z
                       ][zi]) {
                         if (k === "_" || k === "0") {
                           continue;
                         }
-                        if (k === "0") {
-                          kbool = true;
-                          continue;
-                        }
-                        //console.log("            k:" + k + ": "+ reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k].length);
+                        if(!isNaN(+k.substring(k.indexOf(":") + 1))){continue;}
+                       
                         var respElemK = {
                           mandatory: "",
                           name: "",
                           type: "",
                           description: "",
-                          nSpaces: [""]
+                          nSpaces: ['']
                         };
                         respElemK.name = k.substring(k.indexOf(":") + 1);
-                        respElemK.type = "XML Element";
-                        if (kbool) respElemK.mandatory = "[0,1]";
-                        else respElemK.mandatory = "[1]";
+                        if(typeof reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][0] == 'string'){respElemK.mandatory = "[0,1]"; respElemK.type='String'}
+                        else { if(respElemK.name.includes("List")){ respElemK.mandatory = "[0,∞]";respElemK.type=respElemK.name + 'Type'}
+                               else {respElemK.mandatory = "[0,1]"; respElemK.type='XMLElement'}}
                         respElemK.description = "";
                         operationSample.reqFields.push(respElemK);
                         nElem++;
-                        kbool = false;
+
 
                         for (
                           var ki = 0;
@@ -347,34 +356,29 @@ export class IcFormComponent implements OnInit {
                             .length;
                           ki++
                         ) {
-                          //console.log("         ki: " + ki);
-                          var wbool = false;
+
                           for (let w in reqResult["soapenv:Envelope"][x][xi][y][
                             yi
                           ][z][zi][k][ki]) {
                             if (w === "_" || w === "0") {
                               continue;
                             }
-                            if (w === "0") {
-                              wbool = true;
-                              continue;
-                            }
-                            //console.log("            w:" + w + ": "+ reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w].length);
+                            if(!isNaN(+w.substring(w.indexOf(":") + 1))){continue;}
+                            
                             var respElemW = {
                               mandatory: "",
                               name: "",
                               type: "",
                               description: "",
-                              nSpaces: ["", ""]
+                              nSpaces: ['','']
                             };
                             respElemW.name = w.substring(w.indexOf(":") + 1);
-                            respElemW.type = "XML Element";
-                            if (wbool) respElemW.mandatory = "[0,1]";
-                            else respElemW.mandatory = "[1]";
+                            if(typeof reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w][0] == 'string'){respElemW.mandatory = "[0,1]"; respElemW.type='String'}
+                            else { if(respElemW.name.includes("List")){ respElemW.mandatory = "[0,∞]";respElemW.type=respElemW.name + 'Type'}
+                            else {respElemW.mandatory = "[0,1]";respElemW.type='XMLElement'}}  
                             respElemW.description = "";
                             operationSample.reqFields.push(respElemW);
                             nElem++;
-                            wbool = false;
 
                             for (
                               var wi = 0;
@@ -384,40 +388,67 @@ export class IcFormComponent implements OnInit {
                               ][k][ki][w].length;
                               wi++
                             ) {
-                              //console.log("         wi: " + wi);
-                              var lbool = false;
+                              
                               for (let l in reqResult["soapenv:Envelope"][x][
                                 xi
                               ][y][yi][z][zi][k][ki][w][wi]) {
                                 if (l === "_") {
                                   continue;
                                 }
-                                if (l === "0") {
-                                  lbool = true;
-                                  continue;
-                                }
-                                if (l.match("list"))
-                                  console.log(
-                                    "Value: " + l + " contains a list"
-                                  );
-                                //console.log("            l:" + l + ": "+ reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w][wi][l] + " with length: " + reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w][wi][l].length);
+                                if(!isNaN(+l.substring(l.indexOf(":") + 1))){continue;}
+
                                 var respElemL = {
                                   mandatory: "",
                                   name: "",
                                   type: "",
                                   description: "",
-                                  nSpaces: ["", "", ""]
+                                  nSpaces: ['','','']
                                 };
                                 respElemL.name = l.substring(
                                   l.indexOf(":") + 1
                                 );
-                                respElemL.type = "XML Element";
-                                if (lbool) respElemL.mandatory = "[0,1]";
-                                else respElemL.mandatory = "[1]";
+                                if(typeof reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w][wi][l][0] == 'string'){respElemL.mandatory = "[0,1]";respElemL.type='String'}
+                                else { if(respElemL.name.includes("List")){ respElemL.mandatory = "[0,∞]"; respElemL.type=respElemL.name + 'Type';}
+                                       else {respElemL.mandatory = "[0,1]"; respElemL.type='XMLElement'}} 
                                 respElemL.description = "";
                                 operationSample.reqFields.push(respElemL);
                                 nElem++;
-                                lbool = false;
+
+                                for (
+                                  var li = 0;
+                                  li <
+                                  reqResult["soapenv:Envelope"][x][xi][y][yi][z][
+                                    zi
+                                  ][k][ki][w][wi][l].length;
+                                  li++
+                                ) {
+                                  
+                                  for (let r in reqResult["soapenv:Envelope"][x][
+                                    xi
+                                  ][y][yi][z][zi][k][ki][w][wi][l][li]) {
+                                    if (r === "_") {
+                                      continue;
+                                    }
+                                    if(!isNaN(+r.substring(r.indexOf(":") + 1))){continue;}
+
+                                    var respElemR = {
+                                      mandatory: "",
+                                      name: "",
+                                      type: "",
+                                      description: "",
+                                      nSpaces: ['','','','']
+                                    };
+                                    respElemR.name = r.substring(
+                                      r.indexOf(":") + 1
+                                    );
+                                    if(typeof reqResult["soapenv:Envelope"][x][xi][y][yi][z][zi][k][ki][w][wi][l][li][r][0] == 'string'){respElemR.mandatory = "[0,1]";respElemR.type='String'}
+                                    else { if(respElemR.name.includes("List")){ respElemR.mandatory = "[0,∞]";respElemR.type=respElemR.name + 'Type'}
+                                           else {respElemR.mandatory = "[0,1]";respElemR.type='XMLElement'}} 
+                                    respElemR.description = "";
+                                    operationSample.reqFields.push(respElemR);
+                                    nElem++;
+                                  }
+                                }
                               }
                             }
                           }
@@ -438,7 +469,7 @@ export class IcFormComponent implements OnInit {
         _model.operations.push(operationSample);
 
         //console.log(operationSample)
-        console.log(_model);
+        //console.log(_model);
       }
     });
   }

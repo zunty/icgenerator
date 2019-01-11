@@ -12,7 +12,7 @@ export class IntroComponent implements OnInit {
 
   @Input() message: any = {};
 
-  constructor(){
+  constructor(){new Date().toLocaleString
 
 }
 

@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
-    "core-js": "^2.5.4",
+    "core-js": "^2.6.2",
     "jquery": "^3.3.1",
     "ngclipboard": "^2.0.0",
     "popper.js": "^1.14.6",
@@ -27,12 +27,13 @@
     "stream": "0.0.2",
     "timers": "^0.1.1",
     "tslib": "^1.9.0",
+    "vkbeautify": "^0.99.3",
     "xml2js": "^0.4.19",
-    "zone.js": "~0.8.26"
+    "zone.js": "^0.8.27"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.11.4",
-    "@angular/cli": "^7.1.4",
+    "@angular/cli": "^7.2.1",
     "@angular/compiler-cli": "~7.1.0",
     "@angular/language-service": "~7.1.0",
     "@types/jasmine": "~2.8.8",

@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
 import { IcFormComponent } from './ic-form/ic-form.component';
+import { XmlPipe } from './ic-form/ic-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IntroComponent,
-    IcFormComponent
+    IcFormComponent,
+    XmlPipe
   ],
   imports: [
     BrowserModule,

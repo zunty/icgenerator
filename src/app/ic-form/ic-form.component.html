@@ -57,7 +57,7 @@
             <div class="form-group">
                 <div>
                     <label for="description">Service Description</label>
-                    <input type="text" class="form-control" placeholder="The continuation of 'the purpose of this Interface Contract is to describe the interface for service used to ' ..." name="description" [(ngModel)]="model.description" #description="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" required />
+                    <input type="text" class="form-control" placeholder="Paragraph with service description" name="description" [(ngModel)]="model.description" #description="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" required />
                     <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
                         <div *ngIf="description.errors.required">Service description should be filled</div>
                     </div>
@@ -81,15 +81,29 @@
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="soapEndpoint">SOAP Endpoint</label>
+                    <label for="soapEndpoint">SOAP Endpoint(optional)</label>
                     <input type="text" class="form-control" placeholder="Endpoint without 'host:port/' and '.wsdl'" name="soapEndpoint" [(ngModel)]="model.soapEndpoint" #soapEndpoint="ngModel" />
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="restEndpoint">REST Endpoint</label>
+                    <label for="restEndpoint">REST Endpoint(optional)</label>
                     <input type="text" class="form-control" placeholder="Endpoint without 'host:port/' and '.wsdl'"name="restEndpoint" [(ngModel)]="model.restEndpoint" #eproseedName="ngModel" />
                 </div>
             </div>
             <hr class="mb-4" />
+            <div class="form-group">
+                <label>Service Operations</label>
+            </div>
+            <div class="input-group mb-3">                
+                <input type="text" class="form-control" name="serviceOperations" [(ngModel)]="model.serviceOperations" #serviceOperations="ngModel" />
+                <div class="input-group-append input-group-prepend2">
+                    <button type="button" class="btn btn-info btn-sm" (click)="addOperation(serviceOperations.value)">Add operation</button>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    <li *ngFor="let scopeOper of model.operations"><a><span class="badge">{{scopeOper.name}}</span></a></li>
+                </ul>
+            </div>
             <div class="form-group">
                 <label>Related Services</label>
             </div>
@@ -182,4 +196,3 @@
         </form>
     </div>
     <div class="container"><app-intro [message]="model" ></app-intro></div>
-    
