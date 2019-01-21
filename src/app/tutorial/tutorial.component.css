@@ -1,3 +1,11 @@
 .list-group-item {
     display: list-item;
 }
+
+.inline-flex{
+    display: inline-flex;
+}
+
+.margin-bottom{
+    margin-bottom: 2rem
+}
